@@ -1,0 +1,12 @@
+.productCard {
+    height: '100%'
+  }
+.text_foot{
+  font-size: 12px;
+}
+.icon_font{
+  width: 16px !important;
+  height: 16px !important;
+  padding-right: 5px ;
+  margin-top: 10px;
+}

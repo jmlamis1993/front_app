@@ -1,0 +1,27 @@
+.calendar-screen
+{
+ display: flex;
+ flex-flow: column; 
+ height: 100vh;   
+}
+
+.rbc-calendar
+{
+    height: 100vh;
+
+}
+.fab{
+    border-radius: 100%;
+    bottom: 25px;
+    font-size: 30px;
+    padding: 3%;
+    position: fixed;
+    right: 25px;
+}
+.fabdelete{
+    border-radius: 100%;
+    bottom: 25px;
+    padding: 3%;
+    position: fixed;
+    
+}
