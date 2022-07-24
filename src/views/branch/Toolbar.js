@@ -13,7 +13,7 @@ import {
 import { Search as SearchIcon } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { uiOpenBranchModal } from '../../actions/ui';
-import { branchSearch } from '../../actions/branch';
+import { branchClearSearch, branchSearch } from '../../actions/branch';
 
 const classes = {
     root: {},
@@ -34,9 +34,16 @@ export const Toolbar = ({ className, ...rest }) => {
      dispatch(uiOpenBranchModal());  
   }
   const handleChange = (e) => {
-    dispatch(branchSearch(e.target.value)); 
+
+    if(e.target.value === '') { 
+      dispatch(branchClearSearch()); 
+    }
+    else{
+      dispatch(branchSearch(e.target.value)); 
+    }  
     setSearch(e.target.value); 
  }
+
   return (
     <div
       className={clsx(classes.root, className)}

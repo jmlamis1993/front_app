@@ -10,18 +10,27 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
   case types.branchSearch:
+    const aux =  state.branches.filter((val) => val.name.includes(payload))
     return{
       ...state,
-      searchTerm: payload
+      searchTerm: payload,
+      branches : aux
+    }
+  case types.branchClearSearch:
+    return {
+      ...state,
+      searchTerm: '',
+      branches : data
     }
   case types.branchSetActive:   
     return { ...state, activeEvent : payload }
   case types.branchAddNew:
+
     return {
         ...state,
-        branches :[            
-                ...state.branches,
-                 payload            
+        branches :[ 
+                   payload,            
+                ...state.branches,                            
           ]  
     } 
     case types.branchClearActiveEvent:

@@ -13,6 +13,7 @@ import {BranchCard} from './BranchCard';
 import { BranchModal } from './BranchModal';
 import { Pagination } from '@mui/material';
 import usePagination from '../../helpers/usePagination';
+import { branchClearSearch } from '../../actions/branch';
 
 
 
@@ -33,20 +34,12 @@ export const BranchView = () => {
     const PER_PAGE = 6;
     const count = Math.ceil(branches.length / PER_PAGE);
     const _DATA = usePagination(branches, PER_PAGE);
-    const[listbranches, setListbranches] = useState(_DATA)
-
-  const handleChange = (e, p) => {
+    const handleChange = (e, p) => {
     setPage(p);
     _DATA.jump(p);
   };
 
-  useEffect(()=>{
-    if(searchTerm !== '') { 
-      const _DATA = branches.filter(item => item.name.includes(searchTerm));
-      console.log(branches.filter(item => item.name.includes(searchTerm)));
-      setListbranches(_DATA )    
-    }
-  },[searchTerm])
+ 
   
   return (
     <Container maxWidth={false}>

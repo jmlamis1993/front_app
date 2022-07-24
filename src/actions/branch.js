@@ -26,3 +26,6 @@ export const branchDelete= (id) => ({
     payload : text
      
  })
+ export const branchClearSearch= () => ({
+   type : types.branchClearSearch,
+})

@@ -17,7 +17,8 @@ export const types = {
     branchClearActiveEvent: '[branch] Clear Active Branch',
     branchUpdate: '[branch] branch update',
     branchDelete: '[branch] branch delete',
-    branchSearch : '[branch] branch search'
+    branchSearch : '[branch] branch search',
+    branchClearSearch : '[branch] Clear branch search',
 
 
 }
