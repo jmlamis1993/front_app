@@ -2,12 +2,18 @@ import { types } from "../types/types"
 import data from "../views/branch/data"
 
 const initialState = {
+    searchTerm : '',
     branches : data,
     activeEvent : null
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+  case types.branchSearch:
+    return{
+      ...state,
+      searchTerm: payload
+    }
   case types.branchSetActive:   
     return { ...state, activeEvent : payload }
   case types.branchAddNew:

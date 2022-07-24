@@ -21,3 +21,8 @@ export const branchDelete= (id) => ({
     payload : id
      
  })
+ export const branchSearch= (text) => ({
+    type : types.branchSearch,
+    payload : text
+     
+ })

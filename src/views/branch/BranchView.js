@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -11,7 +11,8 @@ import './style.css'
 import {Toolbar} from './Toolbar';
 import {BranchCard} from './BranchCard';
 import { BranchModal } from './BranchModal';
-import { Pagination } from '@mui/material';;
+import { Pagination } from '@mui/material';
+import usePagination from '../../helpers/usePagination';
 
 
 
@@ -24,14 +25,29 @@ const classes = {
 
 
 export const BranchView = () => {
-  
+
     const dispatch = useDispatch();
-    const {branches} = useSelector(state => state.branch);
+    const {branches} = useSelector(state => state.branch); 
+    const {searchTerm} = useSelector(state => state.branch); 
+    let [page, setPage] = useState(1);
+    const PER_PAGE = 6;
+    const count = Math.ceil(branches.length / PER_PAGE);
+    const _DATA = usePagination(branches, PER_PAGE);
+    const[listbranches, setListbranches] = useState(_DATA)
 
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
 
-   
-
-
+  useEffect(()=>{
+    if(searchTerm !== '') { 
+      const _DATA = branches.filter(item => item.name.includes(searchTerm));
+      console.log(branches.filter(item => item.name.includes(searchTerm)));
+      setListbranches(_DATA )    
+    }
+  },[searchTerm])
+  
   return (
     <Container maxWidth={false}>
         <Toolbar />
@@ -40,7 +56,7 @@ export const BranchView = () => {
             container
             spacing={3}
           >
-            {branches.map((branch) => (
+            {_DATA.currentData().map((branch) => (
               <Grid
                 item
                 key={branch.id}
@@ -62,9 +78,10 @@ export const BranchView = () => {
           justifyContent="center"
         >
           <Pagination
-            color="primary"
-            count={3}
+            color="primary"            
             size="small"
+            count={count}
+            onChange={handleChange}
           />
         </Box>
         <BranchModal/>

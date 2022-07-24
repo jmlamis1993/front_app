@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useState} from 'react';
 import clsx from 'clsx';
 import {
   Box,
@@ -13,6 +13,7 @@ import {
 import { Search as SearchIcon } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { uiOpenBranchModal } from '../../actions/ui';
+import { branchSearch } from '../../actions/branch';
 
 const classes = {
     root: {},
@@ -28,10 +29,14 @@ export const Toolbar = ({ className, ...rest }) => {
    
   
   const dispatch = useDispatch();
+  const [search, setSearch] = useState();
   const handleClick = () => {
      dispatch(uiOpenBranchModal());  
   }
-
+  const handleChange = (e) => {
+    dispatch(branchSearch(e.target.value)); 
+    setSearch(e.target.value); 
+ }
   return (
     <div
       className={clsx(classes.root, className)}
@@ -68,8 +73,9 @@ export const Toolbar = ({ className, ...rest }) => {
                   </InputAdornment>
                 )
               }}
-              placeholder="Search product"
+              placeholder="Search Branch"
               variant="outlined"
+              onChange={(e) => handleChange(e)}
             />
           </Box>
         </CardContent>
