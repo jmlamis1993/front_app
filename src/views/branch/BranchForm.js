@@ -38,16 +38,13 @@ const initialValues = {
 } 
 
 export const BranchForm = () => {
-
+  
   //const {description} = useSelector(state => state.branch.activeEvent);  
   const {activeEvent} = useSelector(state => state.branch);
   const [avatar, setAvatar]= useState('');
   const dispatch = useDispatch();    
   const[values,setFieldValue]=useState(initialValues);   
-  const[descript,setDescription]=useState((activeEvent) ? activeEvent.description : '');   
-
-
-  
+  const[descript,setDescription]=useState((activeEvent) ? activeEvent.description : '');
 
 useEffect(() => {    
    if(activeEvent)
@@ -82,21 +79,21 @@ useEffect(() => {
      })*/  
      dispatch(branchDelete());
      dispatch(uiCloseBranchModal());
-     dispatch(branchClearActiveEvent());
- 
+     dispatch(branchClearActiveEvent()); 
     }
     else{
      dispatch(uiCloseBranchModal());
     }
   }
+
   const handleAvatar = (e) => {
         setAvatar(e);
   }
+
   const handleDescription = (e) => {
     setDescription(e);
-}
+  }
   
-
   return (
     <>
      <Formik 

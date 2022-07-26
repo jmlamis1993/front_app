@@ -12,3 +12,9 @@ export const uiOpenBranchModal = () => ({
 export const uiCloseBranchModal = () => ({
     type: types.uiCloseBranchModal
 })
+export const uiOpenProjectModal = () => ({
+    type: types.uiOpenProjectModal
+})
+export const uiCloseProjectModal = () => ({
+    type: types.uiCloseProjectModal
+})

@@ -13,7 +13,6 @@ import {BranchCard} from './BranchCard';
 import { BranchModal } from './BranchModal';
 import { Pagination } from '@mui/material';
 import usePagination from '../../helpers/usePagination';
-import { branchClearSearch } from '../../actions/branch';
 
 
 
@@ -29,7 +28,6 @@ export const BranchView = () => {
 
     const dispatch = useDispatch();
     const {branches} = useSelector(state => state.branch); 
-    const {searchTerm} = useSelector(state => state.branch); 
     let [page, setPage] = useState(1);
     const PER_PAGE = 6;
     const count = Math.ceil(branches.length / PER_PAGE);

@@ -26,12 +26,12 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Calendar" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={RouterLink}  to='/app/project'>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Project" />
-    </ListItemButton>
+    </ListItemButton >
     <ListItemButton>
       <ListItemIcon>
         <FolderIcon />

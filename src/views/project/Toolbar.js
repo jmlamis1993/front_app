@@ -12,8 +12,8 @@ import {
 } from '@mui/material';
 import { Search as SearchIcon } from 'react-feather';
 import { useDispatch } from 'react-redux';
-import { uiOpenBranchModal } from '../../actions/ui';
-import { branchClearSearch, branchSearch } from '../../actions/branch';
+import { uiOpenProjectModal } from '../../actions/ui';
+import { projectClearSearch, projectSearch } from '../../actions/project';
 
 const classes = {
     root: {},
@@ -29,21 +29,19 @@ export const Toolbar = ({ className, ...rest }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState();
   const handleClick = () => {
-     dispatch(uiOpenBranchModal());  
+     dispatch(uiOpenProjectModal());  
   }
   const handleChange = (e) => {
     if(e.target.value === '') { 
-      dispatch(branchClearSearch()); 
+      dispatch(projectClearSearch()); 
     }
     else{
-      dispatch(branchSearch(e.target.value)); 
+      dispatch(projectSearch(e.target.value)); 
     }  
     setSearch(e.target.value); 
   }
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
+    <div    
     >
     <Box
       display="flex"
@@ -54,7 +52,7 @@ export const Toolbar = ({ className, ...rest }) => {
         variant="contained"
         onClick={handleClick}
       >
-        Add Branch
+        Add Project
       </Button>
     </Box>
     <Box mt={3}>
@@ -75,7 +73,7 @@ export const Toolbar = ({ className, ...rest }) => {
                   </InputAdornment>
                 )
               }}
-              placeholder="Search Branch"
+              placeholder="Search Project"
               variant="outlined"
               onChange={(e) => handleChange(e)}
             />
