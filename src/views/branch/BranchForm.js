@@ -38,14 +38,13 @@ const initialValues = {
 } 
 
 export const BranchForm = () => {
-
-  const {activeEvent} = useSelector(state => state.branch);  
+  
+  //const {description} = useSelector(state => state.branch.activeEvent);  
+  const {activeEvent} = useSelector(state => state.branch);
   const [avatar, setAvatar]= useState('');
   const dispatch = useDispatch();    
   const[values,setFieldValue]=useState(initialValues);   
-  const[description,setDescription]=useState();   
-
-  
+  const[descript,setDescription]=useState((activeEvent) ? activeEvent.description : '');
 
 useEffect(() => {    
    if(activeEvent)
@@ -80,18 +79,21 @@ useEffect(() => {
      })*/  
      dispatch(branchDelete());
      dispatch(uiCloseBranchModal());
-     dispatch(branchClearActiveEvent());
- 
+     dispatch(branchClearActiveEvent()); 
     }
     else{
      dispatch(uiCloseBranchModal());
     }
   }
+
   const handleAvatar = (e) => {
         setAvatar(e);
   }
-  
 
+  const handleDescription = (e) => {
+    setDescription(e);
+  }
+  
   return (
     <>
      <Formik 
@@ -118,7 +120,8 @@ useEffect(() => {
       if(activeEvent){
         dispatch(branchUpdate( 
           {        
-        ...values,         
+        ...values, 
+        'description' : descript,
         'avatar' : avatar,        
       }
         ))      
@@ -128,7 +131,8 @@ useEffect(() => {
           {  
             'id': uuid(),      
         ...values,         
-        'avatar' : avatar,        
+        'avatar' : avatar,  
+        'description' : descript,      
       }
         ))      
       }       
@@ -174,8 +178,8 @@ useEffect(() => {
         minRows={6}
         placeholder="Description"        
         style={{ width: '100%', fontSize:'16px'}}   
-        value = {description}
-        onChange = {(e) => setDescription(e.target.value)}     
+        value = {descript}
+        onChange = {(e) => handleDescription(e.target.value)}     
         />    
          <label> Avatar </label>
           <br/>      
@@ -194,7 +198,7 @@ useEffect(() => {
             size="small"
              margin="normal"
              type="text"
-              name="tag"
+              name="tags"
               label="tags"
               variant="outlined"
               value={values.tags}
@@ -204,7 +208,7 @@ useEffect(() => {
         </Grid> 
         <Grid container spacing={2}>
         <Grid item xs={4} >
-        <TextField
+        <InputField
          fullWidth   
         size="small"
         margin="normal"
@@ -219,10 +223,11 @@ useEffect(() => {
         }}
         variant="outlined"
         value={values.phone}
+        name="phone"
       />
       </Grid> 
       <Grid item xs={8} >
-        <TextField
+        <InputField
          fullWidth   
         size="small"
         margin="normal"
@@ -237,13 +242,15 @@ useEffect(() => {
         }}
         variant="outlined"
         value={values.website}
+        name="website"
       />
       </Grid> 
         </Grid> 
     </Grid>
-    <Grid container spacing={2}>
+    <Grid item xs={12} >
+    <Grid container >
     <Grid item xs={8} >
-        <TextField
+        <InputField
          fullWidth   
         size="small"
         margin="normal"
@@ -258,7 +265,9 @@ useEffect(() => {
         }}
         variant="outlined"
         value={values.email}
+        name="email"
       />
+    </Grid>   
     </Grid>   
     </Grid>        
     <Grid item xs={3}>

@@ -2,20 +2,35 @@ import { types } from "../types/types"
 import data from "../views/branch/data"
 
 const initialState = {
+    searchTerm : '',
     branches : data,
     activeEvent : null
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+  case types.branchSearch:
+    const aux =  state.branches.filter((val) => val.name.includes(payload))
+    return{
+      ...state,
+      searchTerm: payload,
+      branches : aux
+    }
+  case types.branchClearSearch:
+    return {
+      ...state,
+      searchTerm: '',
+      branches : data
+    }
   case types.branchSetActive:   
     return { ...state, activeEvent : payload }
   case types.branchAddNew:
+
     return {
         ...state,
-        branches :[            
-                ...state.branches,
-                 payload            
+        branches :[ 
+                   payload,            
+                ...state.branches,                            
           ]  
     } 
     case types.branchClearActiveEvent:

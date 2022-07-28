@@ -1,19 +1,24 @@
 import axios from 'axios';
-import config from 'src/constants';
 export default  (history = null) => {
- const baseURL = 'http://192.0.0.220:8080/';  
+ const baseURL = 'http://127.0.0.1:8000/';  
 
 const AUTH_BASIC_HEADERS = {
     headers: {
-      Authorization: `Basic ${btoa(AUTH_CREDENTIALS)}`,
+      //Authorization: `Basic ${btoa(AUTH_CREDENTIALS)}`,
       'Content-Type': 'application/x-www-form-urlencoded',
+      'Access-Control-Allow-Origin' :'*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+
     },
   };
   
   
   const axiosInstance = axios.create({   
     baseURL: baseURL,
-    //headers,
+    headers: {
+      "Accept": "*/*",
+      "Content-Type": "application/json" ,     
+    }
   });
   
  /* axiosInstance.interceptors.request.use((request) => {

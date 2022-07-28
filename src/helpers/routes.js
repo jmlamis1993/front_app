@@ -7,6 +7,8 @@ import { Home } from '../views/dashboard/Home';
 import { CalendarView } from '../views/calendar/CalendarView';
 import { BranchView } from '../views/branch/BranchView';
 import { FileManager } from '../views/filemanager/FileManager';
+import { ProjectView } from '../views/project/ProjectView';
+
 
 /*import AccountView from 'src/views/account/AccountView';
 import ProfileView from 'src/views/account/AccountView/ProfileDetails';
@@ -28,14 +30,14 @@ const routes =(isLogging) => [
     children: [      
       { path: 'home', element: <Home/> },
       { path: 'calendar', element: <CalendarView/> },
-      { path: 'branch', element: <BranchView/> },
-     
+      { path: 'branch', element: <BranchView/> },     
+      { path: 'project', element: <ProjectView/> },
       /*{ path: 'profile', element: <ProfileView /> },
       { path: 'misTramites', element: <CustomerListView /> },
       { path: '/solicitud-informacion', element: <Statistics /> },
       { path: '/', element: <Homologation /> },    
       { path: '/change-password', element: <ChangePassword /> },    
-      { path: '*', element: <Navigate to="/404" /> },  */
+      { path: '*', element: <Navigate to="/404" /> }, */
     ]
   },
  {
@@ -47,7 +49,7 @@ const routes =(isLogging) => [
       { path: 'register', element: <RegisterView /> },
       { path: '404', element: <NotFoundView /> },      
       { path: '/', element: <Navigate to="/login"/> },
-      { path: '*', element: <Navigate to="/404"/> }*/
+      { path: '*', element: <Navigate to="/404"/> } */
     ]
   }
 ];
