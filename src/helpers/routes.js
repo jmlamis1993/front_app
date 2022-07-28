@@ -31,14 +31,11 @@ const routes =(isLogging) => [
     children: [      
       { path: 'home', element: <Home/> },
       { path: 'calendar', element: <CalendarView/> },
-<<<<<<< HEAD
       { path: 'branch', element: <BranchView/> },     
       { path: 'project', element: <ProjectView/> },
-=======
       { path: 'branch', element: <BranchView/> },
       { path: 'file', element: <FileManagerView/> },
      
->>>>>>> e37eaa551c8ec5f9dd1462d38f340c8d35c4c4d5
       /*{ path: 'profile', element: <ProfileView /> },
       { path: 'misTramites', element: <CustomerListView /> },
       { path: '/solicitud-informacion', element: <Statistics /> },
