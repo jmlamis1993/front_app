@@ -31,8 +31,13 @@ export const mainListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Project" />
+<<<<<<< HEAD
     </ListItemButton >
     <ListItemButton>
+=======
+    </ListItemButton>
+    <ListItemButton component={RouterLink}  to='/app/file'>
+>>>>>>> e37eaa551c8ec5f9dd1462d38f340c8d35c4c4d5
       <ListItemIcon>
         <FolderIcon />
       </ListItemIcon>
