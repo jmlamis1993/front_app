@@ -1,0 +1,11 @@
+instalas Python en el sistema
+recuerda agregar en la instalación Python a las variables globales (Eso te lo pone en la instalación como Add to PATH)
+pip install virtualenv
+python -m venv .venv
+.venv\Scripts\activate.bat
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+pip install -r requirements.txt
+python manage.py makemigrations crm_app
+python manage.py makemigrations user_profile
+python manage.py migrate
+python manage.py runserver

@@ -1,7 +1,17 @@
 import { types } from "../types/types";
+import { calendarService } from "../services/calendarServices";
 
 
-export const eventAddNew = (event) => ({
+export const eventStartAddNew = (event) => { 
+
+     return async(dispatch) =>{
+        const response = await calendarService.AddEvent(event);
+        console.log(response);
+
+     }
+};
+
+const eventAddNew = (event) => ({
     type: types.eventAddNew,
     payload: event
 });

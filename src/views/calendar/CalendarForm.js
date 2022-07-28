@@ -13,7 +13,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { priority,type, status } from '../../helpers/constants';
 import moment from 'moment'
-import { eventAddNew, eventClearActiveEvent, eventDeleted, eventUpdated } from '../../actions/event';
+import { eventStartAddNew, eventClearActiveEvent, eventDeleted, eventUpdated } from '../../actions/event';
 import { useDispatch, useSelector} from 'react-redux'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -139,19 +139,14 @@ export const CalendarForm = ({values}) => {
           ))      
       }
       else{
-        dispatch(eventAddNew(
-        {
-          'id': est_time,
+        dispatch(eventStartAddNew(
+        {      
           ...values,         
           'time_spent' : est_time,
           'est_time' : est_time,
           'description' : descrip,
           'start' : start,
-          'end': end,          
-          'user' : {
-             _id : 1,
-            name: 'Fernando',
-         }
+          'end': end,        
         }
       )); 
       }       
