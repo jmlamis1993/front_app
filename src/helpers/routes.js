@@ -6,7 +6,7 @@ import Dashboard from '../layout/dashboardLayout';
 import { Home } from '../views/dashboard/Home';
 import { CalendarView } from '../views/calendar/CalendarView';
 import { BranchView } from '../views/branch/BranchView';
-import { FileManager } from '../views/filemanager/FileManager';
+import { FileManagerView } from '../views/filemanager/FileManagerView';
 
 /*import AccountView from 'src/views/account/AccountView';
 import ProfileView from 'src/views/account/AccountView/ProfileDetails';
@@ -29,6 +29,7 @@ const routes =(isLogging) => [
       { path: 'home', element: <Home/> },
       { path: 'calendar', element: <CalendarView/> },
       { path: 'branch', element: <BranchView/> },
+      { path: 'file', element: <FileManagerView/> },
      
       /*{ path: 'profile', element: <ProfileView /> },
       { path: 'misTramites', element: <CustomerListView /> },

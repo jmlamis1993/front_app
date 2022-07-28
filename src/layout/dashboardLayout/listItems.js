@@ -32,7 +32,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Project" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={RouterLink}  to='/app/file'>
       <ListItemIcon>
         <FolderIcon />
       </ListItemIcon>
