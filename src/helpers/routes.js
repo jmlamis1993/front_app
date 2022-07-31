@@ -6,7 +6,6 @@ import Dashboard from '../layout/dashboardLayout';
 import { Home } from '../views/dashboard/Home';
 import { CalendarView } from '../views/calendar/CalendarView';
 import { BranchView } from '../views/branch/BranchView';
-import { FileManager } from '../views/filemanager/FileManager';
 import { ProjectView } from '../views/project/ProjectView';
 
 import { FileManagerView } from '../views/filemanager/FileManagerView';

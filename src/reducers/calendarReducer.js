@@ -1,27 +1,28 @@
+import { typographyClasses } from "@mui/material";
 import moment from "moment";
 import { types } from "../types/types";
 
+/*{
+  id:1,
+  task_name: 'Cumpleaños del Jefe',
+  project: '',
+  time_spent: 0,   
+  est_time: 0,  
+  description: '',  
+  tags: '',  
+  priority: '',  
+  type: '',      
+  status: '',         
+  start: moment().toDate(),         
+  end: moment().add(2,'hours').toDate(),      
+user:{
+  _id : 1,
+  name: 'Fernando',
+}
+ }*/
+
 const initialState = {
-    events: [
-        {
-        id:1,
-        task_name: 'Cumpleaños del Jefe',
-        project: '',
-        time_spent: 0,   
-        est_time: 0,  
-        description: '',  
-        tags: '',  
-        priority: '',  
-        type: '',      
-        status: '',         
-        start: moment().toDate(),         
-        end: moment().add(2,'hours').toDate(),      
-      user:{
-        _id : 1,
-        name: 'Fernando',
-      }
-       }
-    ],
+    events: [],
     activeEvent : null
 };
 
@@ -30,6 +31,7 @@ export default (state = initialState, { type, payload }) => {
 
   case types.eventSetActive:
     return { ...state,  activeEvent : payload}
+    
     case types.eventAddNew:
     return {
         ...state,
@@ -58,6 +60,12 @@ export default (state = initialState, { type, payload }) => {
              ),
              activeEvent: null 
           }  
+    case types.eventLoader:
+      return{
+        ...state,
+        events: [...payload]
+      }
+
   default:
     return state
   }

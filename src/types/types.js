@@ -11,8 +11,10 @@ export const types = {
     eventStartAddNew: '[event] Start Add New',
     eventSetActive: '[event] Set Active',
     eventClearActiveEvent: '[event] Clear Active Event',
+    eventStartUpdate: '[event] Start Update',
     eventUpdate: '[event] Event updated',
     eventDeleted : '[event] Event deleted',
+    eventLoader : '[event] Event Loader',
 
 
     branchAddNew: '[branch] Add new',

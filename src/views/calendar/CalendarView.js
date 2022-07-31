@@ -1,5 +1,5 @@
 
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import { messages } from '../../helpers/calendar-sms-es'
 import { CalendarEvent } from './CalendarEvent'
@@ -10,7 +10,7 @@ import './style.css'
 import 'moment/locale/es'
 import moment from 'moment'
 import { uiOpenModal } from '../../actions/ui'
-import { eventSetActive } from '../../actions/event'
+import { eventSetActive, eventStartLoading } from '../../actions/event'
 import { AddNewFab } from '../../components/AddNewFab'
 const localizer = momentLocalizer(moment)
 
@@ -34,6 +34,10 @@ export const CalendarView = () => {
     setlastView(e);
     localStorage.setItem('lastView',e);
   }  
+  useEffect(() => {
+    dispatch(eventStartLoading())
+  }, [dispatch])
+  
 
   const eventStyleGetter = (event, start, end, isSelecter) =>{
      const style = {
