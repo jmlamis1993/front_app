@@ -1,14 +1,19 @@
 import { types } from "../types/types"
-import data from "../views/project/data"
+
 
 const initialState = {
     searchTerm : '',
-    projects : data,
+    projects : [],
     activeEvent : null
 }
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
+      case types.projectLoader:
+        return{
+          ...state,
+          projects: payload
+        }
         case types.projectSearch:
           const aux =  state.projects.filter((val) => val.name.includes(payload))
           return{
@@ -20,7 +25,7 @@ export default (state = initialState, { type, payload }) => {
           return {
             ...state,
             searchTerm: '',
-            projects : data
+            projects : []
           }
         case types.projectSetActive:   
           return { ...state, activeEvent : payload }

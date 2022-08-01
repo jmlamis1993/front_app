@@ -19,7 +19,8 @@ export const prepareEvent = ( events = []) => {
          "end": moment(e.finish_date).toDate(),    
          "user":{
          _id : e.owner.id,
-         name: e.owner.email,
+         name: e.owner.name,
+         email: e.owner.email,
         }
       }
    });     

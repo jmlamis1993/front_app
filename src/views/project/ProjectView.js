@@ -7,10 +7,17 @@ import {
 import {Result} from './Result';
 import {Toolbar} from './Toolbar';
 import { ProjectModal } from './ProjectModal';
+import { useDispatch} from 'react-redux';
+import { projectStartLoading } from '../../actions/project';
+
 
 
 export const ProjectView = () => {
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(projectStartLoading())
+  }, [dispatch])
+  
 
   return (   
       <Container maxWidth={false}>

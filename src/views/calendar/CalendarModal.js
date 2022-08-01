@@ -45,8 +45,8 @@ export const CalendarModal = () => {
       est_time : 0,          
       description: '',
       'user' : {
-             _id : 1,
-            name: 'Fernando',
+             _id : '',
+            name: '',
          }
     }
     const {activeEvent} = useSelector(state => state.calendar);

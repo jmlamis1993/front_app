@@ -13,6 +13,7 @@ export const types = {
     eventClearActiveEvent: '[event] Clear Active Event',
     eventStartUpdate: '[event] Start Update',
     eventUpdate: '[event] Event updated',
+    eventStartDelete: '[event] Event Start Delete',
     eventDeleted : '[event] Event deleted',
     eventLoader : '[event] Event Loader',
 
@@ -27,12 +28,14 @@ export const types = {
 
 
     projectAddNew: '[project] Add new',
+    projectStartAddNew: '[project] Start Add new',
     projectSetActive : '[project] Set Active',
     projectClearActiveEvent: '[project] Clear Active project',
     projectUpdate: '[project] branch project',
     projectDelete: '[project] branch project',
     projectSearch : '[project] branch project',
     projectClearSearch : '[project] Clear project search',
+    projectLoader : '[project] Project Loader',
 
 
 }

@@ -21,8 +21,8 @@ import {
 
 export const Result = () => {
     const dispatch = useDispatch();
-    const {projects} = useSelector(state => state.project); 
-    console.log(projects);
+    const {projects} = useSelector(state => state.project);
+   
 
     const [selectedProjectIds, setselectedProjectIds] = useState([]);
     const [limit, setLimit] = useState(10);
@@ -138,10 +138,10 @@ export const Result = () => {
                         {project.description}
                       </TableCell>
                       <TableCell>
-                      {project.startDate}
+                      {moment(project.startDate).format('DD/MM/YYYY')}
                       </TableCell> 
                       <TableCell>
-                      {project.EndDate}
+                      {moment(project.EndDate).format('DD/MM/YYYY')}
                       </TableCell>                 
                       <TableCell>
                         {project.status}

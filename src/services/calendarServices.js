@@ -5,7 +5,7 @@ export const calendarService = {
     ListEvents,
     AddEvent,
     UpdateEvent,
-    //DeleteEvent
+    DeleteEvent
 };
 
 function ListEvents() { 
@@ -55,5 +55,11 @@ async function UpdateEvent(event){
         })
         return axiosInstance()
        .put(`api/crm_app/task/list/${event.id}`, formData);
+}
+
+async function DeleteEvent(id){
+    
+        return axiosInstance()
+       .delete(`api/crm_app/task/list/${id}`);
 }
   

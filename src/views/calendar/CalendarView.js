@@ -12,6 +12,8 @@ import moment from 'moment'
 import { uiOpenModal } from '../../actions/ui'
 import { eventSetActive, eventStartLoading } from '../../actions/event'
 import { AddNewFab } from '../../components/AddNewFab'
+import { DeleteEventFab } from '../../components/DeleteEventFab'
+
 const localizer = momentLocalizer(moment)
 
 export const CalendarView = () => {  
@@ -27,7 +29,7 @@ export const CalendarView = () => {
 
   const onSelectEvent = (e) => {
     dispatch(eventSetActive(e));
-    dispatch(uiOpenModal()); 
+    //dispatch(uiOpenModal()); 
   }
 
   const onViewChange = (e) => {
@@ -69,9 +71,12 @@ export const CalendarView = () => {
       view={lastView}
     />
     <AddNewFab/>
-    
-    <CalendarModal/>
+    {
+       (activeEvent) && <DeleteEventFab/>
+    }
+     <CalendarModal/>
   </>
+ 
   )
 }
 

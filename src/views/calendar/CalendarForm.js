@@ -19,7 +19,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { uiCloseModal } from '../../actions/ui';
-import Swal from 'sweetalert2'
+
 
 // DataSet
 const project=[
@@ -66,35 +66,10 @@ export const CalendarForm = ({values}) => {
     const handleDescrip = (value) =>{
       setDescrip(value);
     }
-    const handleDeleteClick = () =>{
-         if(activeEvent){
-          /*Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-          }).then((result) => {
-            dispatch(eventDeleted());
-            dispatch(uiCloseModal());
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your Event has been deleted.',
-                'success'
-              )
-            }
-          })*/  
-          dispatch(eventDeleted());
+    const handleCancelClick = () =>{        
           dispatch(uiCloseModal());
-          dispatch(eventClearActiveEvent());
-      
-         }
-         else{
-          dispatch(uiCloseModal());
-         }
+          dispatch(eventClearActiveEvent());      
+        
     }
 
 
@@ -170,9 +145,9 @@ export const CalendarForm = ({values}) => {
         <Grid item xs={5} sm={7}> 
         <TextField
           size="small"
-          error={Boolean(touched.oldPassword && errors.oldPassword)}
+          error={Boolean(touched.task_name && errors.task_name)}
           fullWidth
-          helperText={touched.oldPassword && errors.oldPassword}
+          helperText={touched.task_name && errors.task_name}
           label="Title"
           margin="normal"
           name="task_name"
@@ -246,9 +221,9 @@ export const CalendarForm = ({values}) => {
         <Grid item xs={12} >
         <TextField
           size="small"
-          error={Boolean(touched.oldPassword && errors.oldPassword)}
+          error={Boolean(touched.tags && errors.tags)}
           fullWidth
-          helperText={touched.oldPassword && errors.oldPassword}
+          helperText={touched.tags && errors.tags}
           label="Tag"
           margin="normal"
           name="tags"
@@ -327,10 +302,10 @@ export const CalendarForm = ({values}) => {
                     size="large"
                     margin="normal"                     
                     variant="contained"                    
-                    color= {(activeEvent) ? 'error' : 'inherit'} 
+                    color= { 'inherit'} 
                     fullWidth                  
-                     onClick={handleDeleteClick}                   
-                  >    {(activeEvent) ? 'Eliminar' : 'Cancelar'}   
+                     onClick={handleCancelClick}                   
+                  >    {'Cancelar'}   
         </Button>
         </Grid>
         </Grid>

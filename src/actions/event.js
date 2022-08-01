@@ -13,7 +13,8 @@ export const eventStartAddNew = (event) => {
            event.id = evento.task.id;
            event.user = {
             _id : evento.task.owner.id,
-            name: evento.task.owner.email,
+            name: evento.task.owner.name,
+            email:evento.task.owner.email,
           } ;  
            dispatch(eventAddNew(event));
          }     
@@ -70,9 +71,26 @@ const eventUpdated = (event) => ({
    type : types.eventUpdate,
    payload : event  
 });
+
+export const eventStartDelete = () => {
+   return async(dispatch, getState) =>{
+      const {id} = getState().calendar.activeEvent;
+      
+      try {
+         const response = await calendarService.DeleteEvent(id);
+         if(response.status === 204){ 
+           dispatch(eventDeleted(id));
+         }     
+         
+      } catch (error) {
+         console.log(error);  
+      }
+     }
+}
 export const eventClearActiveEvent = () => ({
    type: types.eventClearActiveEvent
 })
-export const eventDeleted= () => ({
-    type: types.eventDeleted
+const eventDeleted= (id) => ({
+    type: types.eventDeleted,
+    payload : id
  })
