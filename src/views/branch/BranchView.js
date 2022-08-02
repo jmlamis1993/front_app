@@ -13,6 +13,7 @@ import {BranchCard} from './BranchCard';
 import { BranchModal } from './BranchModal';
 import { Pagination } from '@mui/material';
 import usePagination from '../../helpers/usePagination';
+import { branchStartLoading } from '../../actions/branch';
 
 
 
@@ -35,7 +36,11 @@ export const BranchView = () => {
     const handleChange = (e, p) => {
     setPage(p);
     _DATA.jump(p);
-  };
+   };
+    useEffect(() => {
+    dispatch(branchStartLoading())
+    }, [dispatch])
+    
 
  
   

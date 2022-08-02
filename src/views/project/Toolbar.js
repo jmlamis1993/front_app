@@ -13,7 +13,7 @@ import {
 import { Search as SearchIcon } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { uiOpenProjectModal } from '../../actions/ui';
-import { projectClearSearch, projectSearch } from '../../actions/project';
+import { projectSearch, projectStartLoading } from '../../actions/project';
 
 const classes = {
     root: {},
@@ -33,7 +33,7 @@ export const Toolbar = ({ className, ...rest }) => {
   }
   const handleChange = (e) => {
     if(e.target.value === '') { 
-      dispatch(projectClearSearch()); 
+      dispatch(projectStartLoading()); 
     }
     else{
       dispatch(projectSearch(e.target.value)); 

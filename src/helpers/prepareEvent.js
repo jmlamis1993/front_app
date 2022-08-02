@@ -1,4 +1,3 @@
-import {React,useState} from 'react'
 import moment from 'moment'
 
 export const prepareEvent = ( events = []) => {

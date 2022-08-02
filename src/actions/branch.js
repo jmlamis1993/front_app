@@ -1,6 +1,27 @@
 import { types } from "../types/types";
+import { branchService } from "../services/branchService";
+import { prepareBranch } from "../helpers/prepareBranch";
 
 
+
+export const branchStartLoading = () =>{
+   return async(dispatch) =>{
+      try {
+         const response = await branchService.ListBranch();        
+         if(response.status === 200){
+            const branch = prepareBranch(response.data);   
+            console.log(branch);                     
+            dispatch(branchLoaded(branch));
+         }       
+      } catch (error) {
+         console.log(error); 
+      }
+   }
+}
+const branchLoaded = (event) =>({
+  type:types.branchLoader,
+  payload:event, 
+})
 export const branchAddNew = (event) => ({
     type: types.branchAddNew,
     payload: event

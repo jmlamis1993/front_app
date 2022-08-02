@@ -19,12 +19,16 @@ export const types = {
 
 
     branchAddNew: '[branch] Add new',
+    branchStartAddNew: '[branch] Start Add new',
     branchSetActive : '[branch] Set Active',
     branchClearActiveEvent: '[branch] Clear Active Branch',
     branchUpdate: '[branch] branch update',
+    branchStartUpdate: '[branch] Start branch update',
     branchDelete: '[branch] branch delete',
+    branchStartDelete: '[branch] Start branch delete',
     branchSearch : '[branch] branch search',
     branchClearSearch : '[branch] Clear branch search',
+    branchLoader : '[project] Branch Loader',
 
 
     projectAddNew: '[project] Add new',

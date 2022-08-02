@@ -1,14 +1,19 @@
 import { types } from "../types/types"
-import data from "../views/branch/data"
 
 const initialState = {
     searchTerm : '',
-    branches : data,
+    branches : [],
     activeEvent : null
 }
 
 export default (state = initialState, { type, payload }) => {
+  
   switch (type) {
+    case types.branchLoader:
+      return{
+        ...state,
+        branches: payload
+      }
   case types.branchSearch:
     const aux =  state.branches.filter((val) => val.name.includes(payload))
     return{
@@ -20,7 +25,7 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       searchTerm: '',
-      branches : data
+      branches : []
     }
   case types.branchSetActive:   
     return { ...state, activeEvent : payload }

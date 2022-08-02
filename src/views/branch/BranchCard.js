@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Divider,
+  IconButton,
   Grid,
   Typography,
 } from '@mui/material';
@@ -15,9 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
-import WebAssetIcon from '@mui/icons-material/WebAsset';
 import { useDispatch, useSelector} from 'react-redux'
-import { branchAddNew, branchClearActiveEvent, branchDelete, branchSetActive, branchUpdate } from '../../actions/branch';
+import { branchClearActiveEvent, branchDelete, branchSetActive, branchUpdate } from '../../actions/branch';
 import Swal from 'sweetalert2'
 import { uiOpenBranchModal } from '../../actions/ui';
 
@@ -37,7 +37,7 @@ export const BranchCard = ({ className, branch, ...rest }) => {
 
   const dispatch = useDispatch();
   const {activeEvent} = useSelector(state => state.branch);
-
+  const baseURL = 'http://127.0.0.1:8000/';
 
   const handleDeleteClick = (id) =>{   
      Swal.fire({
@@ -67,10 +67,7 @@ export const BranchCard = ({ className, branch, ...rest }) => {
 }
 
   return (
-    <Card
-    className={clsx(classes.root, className)}
-    {...rest}
-  >
+    <Card>
     <CardContent>
       <Box
         display="flex"
@@ -79,7 +76,7 @@ export const BranchCard = ({ className, branch, ...rest }) => {
       >
         <Avatar
           alt="Product"
-          src={branch.avatar}
+          src= {baseURL + branch.avatar}
           variant="square"
         />
       </Box>
@@ -130,7 +127,7 @@ export const BranchCard = ({ className, branch, ...rest }) => {
        align="center"
        className="text_foot"
        >
-        {branch.email}
+        {branch.address}
       </Typography>
       </Grid>
       </Grid>
@@ -143,10 +140,7 @@ export const BranchCard = ({ className, branch, ...rest }) => {
         justify="space-between"
         spacing={2}
       >    
-        <Grid
-          className={classes.statsItem}
-          item
-        >
+        <Grid item >
          <Grid
         container
         justify="space-between"
@@ -158,35 +152,35 @@ export const BranchCard = ({ className, branch, ...rest }) => {
             color="action"
           />
        </Grid>
-       <Grid item xs={7} >
+       <Grid item xs={9} >
        <Typography           
             color="textSecondary"
             display="inline"
             variant="p"
           >
             
-            {branch.contact.username}
+            {branch.user.name}
           </Typography>
        </Grid>
-       <Grid item xs={4}>
+       <Grid item xs={2}>
        <Grid
         container
         justify="space-between"
         spacing={2}
       >   
       <Grid item xs={4}>
-      <Button onClick={() => handleEditClick(branch)}>
+      <IconButton onClick={() => handleEditClick(branch)}>
         <EditIcon
             color="primary"
           />
-        </Button>
+        </IconButton>
       </Grid>
       <Grid item xs={4}>
-      <Button onClick={() => handleDeleteClick(branch.id)}>
+      <IconButton onClick={() => handleDeleteClick(branch.id)}>
        <DeleteIcon
             color="error"
           />
-       </Button> 
+       </IconButton> 
       </Grid>     
        </Grid>
        </Grid>   
