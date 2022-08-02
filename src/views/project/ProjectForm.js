@@ -12,13 +12,11 @@ import {
   InputAdornment ,
    
 } from '@mui/material';
-import WebAssetIcon from '@mui/icons-material/WebAsset';
-import { branchAddNew, branchClearActiveEvent, branchDelete, branchUpdate } from '../../actions/branch';
+import { projectStartAddNew,projectStartUpdate} from '../../actions/project';
 import { useDispatch, useSelector} from 'react-redux'
-import { uiCloseBranchModal } from '../../actions/ui';
+import {  uiCloseProjectModal } from '../../actions/ui';
 import InputField from '../../components/FormFields/InputField';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
-import { v4 as uuid } from 'uuid';
 import moment from 'moment'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -32,7 +30,7 @@ const initialValues = {
   description:'',
   startDate: '',
   EndDate: '',
-  status: 1606916400000,
+  status: '',
 
 } 
 
@@ -46,6 +44,8 @@ export const ProjectForm = () => {
   const now = moment().minutes(0).seconds(0).add(1,'hours');
   const[start,setSartDate]=useState((activeEvent) ? values.start : now);
   const[end,setEndDate]=useState((activeEvent) ? values.end : now);
+  const[status,setStatus]=useState((activeEvent) ? activeEvent.status : '' );
+
   
   useEffect(() => {    
     if(activeEvent)
@@ -56,35 +56,10 @@ export const ProjectForm = () => {
        setFieldValue(initialValues);                
      }     
     },[activeEvent,setFieldValue])
-    const handleDeleteClick = () =>{
-      if(activeEvent){
-       /*Swal.fire({
-         title: 'Are you sure?',
-         text: "You won't be able to revert this!",
-         icon: 'warning',
-         showCancelButton: true,
-         confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Yes, delete it!',
-       }).then((result) => {
-         dispatch(eventDeleted());
-         dispatch(uiCloseModal());
-         if (result.isConfirmed) {
-           Swal.fire(
-             'Deleted!',
-             'Your Event has been deleted.',
-             'success'
-           )
-         }
-       })*/  
-       dispatch(branchDelete());
-       dispatch(uiCloseBranchModal());
-       dispatch(branchClearActiveEvent()); 
-      }
-      else{
-       dispatch(uiCloseBranchModal());
-      }
-    }
+
+    const handleCancelClick = () =>{     
+      dispatch(uiCloseProjectModal()); 
+  }
   
    
     const handleDescription = (e) => {
@@ -95,6 +70,9 @@ export const ProjectForm = () => {
     }
     const handleEndDateChange = (e) =>{
       setEndDate(e);
+    }
+    const handleSetStatus = (e) =>{
+      setStatus(e.target.value);
     }
     
   return (
@@ -121,27 +99,30 @@ export const ProjectForm = () => {
    }
    onSubmit={(values,actions) => { 
      if(activeEvent){
-       dispatch(branchUpdate( 
+       dispatch(projectStartUpdate( 
          {        
        ...values, 
+       'status' : status, 
        'description' : descript,    
        'start' : start,         
        'end': end,          
      }
-       ))      
+       ))  
+             
+    
      }
      else{
-       dispatch(branchAddNew( 
-         {  
-           'id': uuid(),      
-       ...values,       
+       dispatch(projectStartAddNew( 
+         {           
+       ...values,    
+      'status' : status,    
      'description' : descript, 
      'start' : start,         
       'end': end,     
      }
        ))      
      }       
-     dispatch(uiCloseBranchModal());       
+       
    }}
  >
    {({
@@ -220,18 +201,12 @@ export const ProjectForm = () => {
        <InputField
         fullWidth   
        size="small"
+       onChange = {handleSetStatus}
        margin="normal"
        id="input-with-icon-textfield"
-       label="Email"
-       InputProps={{
-         startAdornment: (
-           <InputAdornment position="start">
-             <MarkunreadIcon />
-           </InputAdornment>
-         ),
-       }}
+       label="Status"       
        variant="outlined"
-       value={values.status}
+       value={status}
        name="email"
      />
    </Grid>   
@@ -253,10 +228,10 @@ export const ProjectForm = () => {
                    size="large"
                    margin="normal"                     
                    variant="contained"                    
-                   color= {(activeEvent) ? 'error' : 'inherit'} 
+                   color= 'inherit' 
                    fullWidth                  
-                    onClick={handleDeleteClick}                   
-                 >    {(activeEvent) ? 'Delete' : 'Cancel'}   
+                    onClick={handleCancelClick}                   
+                 >    {'Cancel'}   
        </Button>
        </Grid>
        </Grid>

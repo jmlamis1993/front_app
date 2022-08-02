@@ -15,19 +15,51 @@ import {
     TablePagination,
     TableRow,
     Typography,
+    IconButton,
+    LinearProgress
     
   } from '@mui/material';
-  import data from './data';   
+  import data from './data';  
+  import DeleteIcon from '@mui/icons-material/Delete';
+  import EditIcon from '@mui/icons-material/Edit'; 
+import { projectClearActiveEvent, projectStartDelete, projectSetActive} from '../../actions/project';
+import { uiOpenProjectModal } from '../../actions/ui';
+import Swal from 'sweetalert2'
+
 
 export const Result = () => {
     const dispatch = useDispatch();
-    const {projects} = useSelector(state => state.project);
-   
-
+    const {projects} = useSelector(state => state.project); 
     const [selectedProjectIds, setselectedProjectIds] = useState([]);
     const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(0);
-  
+    const [page, setPage] = useState();
+
+    const handleClickDelete =(project)=>{
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {         
+      if (result.isConfirmed) {
+        dispatch(projectSetActive(project))
+        dispatch(projectStartDelete());
+        dispatch(projectClearActiveEvent());  
+          Swal.fire(
+            'Deleted!',
+            'Your Event has been deleted.',
+            'success'
+          )
+        }
+      })         
+    }
+   const handleClickEdit =(project)=>{
+    dispatch(projectSetActive(project))
+    dispatch(uiOpenProjectModal());
+    }
     if(projects!=null){
       const handleSelectAll = (event) => {
         let newSelectedProjectIds;
@@ -105,6 +137,9 @@ export const Result = () => {
                     <TableCell>
                       Status
                     </TableCell>
+                    <TableCell>
+                      Actions
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -145,6 +180,15 @@ export const Result = () => {
                       </TableCell>                 
                       <TableCell>
                         {project.status}
+                      </TableCell>
+                      <TableCell>
+                      <IconButton  color="primary"  aria-label="cancel" onClick={() => handleClickEdit(project)}>
+                      <EditIcon />
+                      </IconButton > 
+                      <IconButton  color="error"  aria-label="delete" onClick={() => handleClickDelete(project)}>
+                      <DeleteIcon />
+                      </IconButton >   
+                     
                       </TableCell>
                     </TableRow>
                   ))}

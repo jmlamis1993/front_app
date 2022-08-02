@@ -10,6 +10,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 import { NavLink as RouterLink } from 'react-router-dom';
 
 export const mainListItems = (
@@ -26,18 +27,25 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Calendar" />
     </ListItemButton>
+    <ListItemButton component={RouterLink}  to='/app/branch'>
+      <ListItemIcon>
+        <ApartmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Company"/>
+    </ListItemButton>  
     <ListItemButton component={RouterLink}  to='/app/project'>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Project" />
-    </ListItemButton >    
+    </ListItemButton > 
+     
     <ListItemButton component={RouterLink}  to='/app/file'>
       <ListItemIcon>
         <FolderIcon />
       </ListItemIcon>
       <ListItemText primary="Files" />
-    </ListItemButton>
+    </ListItemButton>    
     <ListItemButton>
       <ListItemIcon>
         <AlternateEmailIcon />
@@ -51,7 +59,7 @@ export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
     </ListSubheader>
-    <ListItemButton>
+    <ListItemButton component={RouterLink}  to='/app/profile'>
        <ListItemIcon>        
         <AccountBoxIcon />
       </ListItemIcon>

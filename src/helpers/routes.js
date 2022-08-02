@@ -9,6 +9,7 @@ import { BranchView } from '../views/branch/BranchView';
 import { ProjectView } from '../views/project/ProjectView';
 
 import { FileManagerView } from '../views/filemanager/FileManagerView';
+import { UserProfile } from '../views/auth/UserProfile';
 
 /*import AccountView from 'src/views/account/AccountView';
 import ProfileView from 'src/views/account/AccountView/ProfileDetails';
@@ -34,6 +35,7 @@ const routes =(isLogging) => [
       { path: 'project', element: <ProjectView/> },
       { path: 'branch', element: <BranchView/> },
       { path: 'file', element: <FileManagerView/> },
+      { path: 'profile', element: <UserProfile/> },
      
       /*{ path: 'profile', element: <ProfileView /> },
       { path: 'misTramites', element: <CustomerListView /> },

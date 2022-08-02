@@ -57,9 +57,10 @@ export const eventStartUpdate = (event) =>{
    return async(dispatch) =>{
       try {
          const response = await calendarService.UpdateEvent(event);
-         if(response.status === 200){       
+         if(response.status === 200){      
            
            dispatch(eventUpdated(event));
+           dispatch(eventClearActiveEvent(event));
          }     
          
       } catch (error) {

@@ -22,10 +22,10 @@ const handleClickDelete = () => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!',
-          }).then((result) => {
-            dispatch(eventStartDelete());
-            dispatch(eventClearActiveEvent());   
+          }).then((result) => {             
           if (result.isConfirmed) {
+            dispatch(eventStartDelete());
+            dispatch(eventClearActiveEvent());  
               Swal.fire(
                 'Deleted!',
                 'Your Event has been deleted.',
