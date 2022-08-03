@@ -14,8 +14,6 @@ function ListProject() {
   }
 
   async function AddProject(event){
-    console.log(event);
-
     let formData = JSON.stringify({       
         "name": event.name,
         "status": event.status,
