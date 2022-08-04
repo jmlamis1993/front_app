@@ -9,16 +9,20 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 //import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import { startlogin } from '../../actions/auth';
+import { useDispatch } from "react-redux";
 
 
-export default function login() {
-  const handleSubmit = (event) => {
+
+export  const LoginView = () => {
+   const dispatch = useDispatch();
+    const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+   const email = data.get('email');
+   const password = data.get('password');
+    dispatch(startlogin(email,password));
+    
   };
 
   return (
@@ -31,9 +35,9 @@ export default function login() {
       alignItems: 'center',
     }}
   >
-    <Avatar sx={{ bgcolor: 'secondary.main' }}>
-      <img src='/img/logo.png' alt="logo" />
-    </Avatar>
+   
+      <img src='/static/images/login_logo.jpg' alt="logo" className='logo-image' />
+ 
     <Typography component="h1" variant="h5">
       Sign in
     </Typography>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import LoginView from '../views/auth/Login';
+import {LoginView} from '../views/auth/LoginView';
 import MainLayout from '../layout/mainlayout';
 import Dashboard from '../layout/dashboardLayout';
 import { Home } from '../views/dashboard/Home';
@@ -28,14 +28,15 @@ const routes =(isLogging) => [
   {
     path: '/app',    
     element: isLogging ? <Dashboard/>: <Navigate to="/login"/>,
-    children: [      
-      { path: 'home', element: <Home/> },
+    children: [  
+      
       { path: 'calendar', element: <CalendarView/> },
       { path: 'branch', element: <BranchView/> },     
       { path: 'project', element: <ProjectView/> },
       { path: 'branch', element: <BranchView/> },
       { path: 'file', element: <FileManagerView/> },
       { path: 'profile', element: <UserProfile/> },
+      { path: 'home', element: <Home /> }, 
      
       /*{ path: 'profile', element: <ProfileView /> },
       { path: 'misTramites', element: <CustomerListView /> },
@@ -55,6 +56,8 @@ const routes =(isLogging) => [
       { path: '404', element: <NotFoundView /> },      
       { path: '/', element: <Navigate to="/login"/> },
       { path: '*', element: <Navigate to="/404"/> } */
+      { path: '/', element: <Navigate to="/login"/> },
+
     ]
   }
 ];

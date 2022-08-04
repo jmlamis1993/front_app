@@ -43,5 +43,8 @@ export const types = {
     projectClearSearch : '[project] Clear project search',
     projectLoader : '[project] Project Loader',
 
+    authLoggin : '[auth] User Login',
+    authLogout : '[auth] User Logout',
+
 
 }

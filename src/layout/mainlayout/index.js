@@ -22,7 +22,7 @@ const MainLayout = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://app.riverafence.com/uploads/domain/40785/background/IMG_0159_c42d6db396b71b1d75f8fe2f11c9f12a.JPG)',
+          backgroundImage: 'url(/static/images/login_image.jpg)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) =>
             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

@@ -42,7 +42,8 @@ export const BranchCard = ({ className, branch, ...rest }) => {
   const { activeEvent } = useSelector((state) => state.branch);
   const baseURL = "http://127.0.0.1:8000/";
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = (branch) => {
+    dispatch(branchSetActive(branch));
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -55,6 +56,9 @@ export const BranchCard = ({ className, branch, ...rest }) => {
       if (result.isConfirmed) {
         dispatch(branchStartDelete());
         Swal.fire("Deleted!", "Your Branch has been deleted.", "success");
+      }
+      else{
+        dispatch(branchClearActiveEvent());
       }
     });
   };
@@ -129,7 +133,7 @@ export const BranchCard = ({ className, branch, ...rest }) => {
                 </IconButton>
               </Grid>
               <Grid item xs={4}>
-                <IconButton className="icon_font" onClick={() => handleDeleteClick(branch.id)}>
+                <IconButton className="icon_font" onClick={() => handleDeleteClick(branch)}>
                   <DeleteIcon color="error" />
                 </IconButton>
               </Grid>

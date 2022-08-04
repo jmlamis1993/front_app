@@ -1,16 +1,6 @@
 import axios from 'axios';
 export default  (history = null) => {
- const baseURL = 'http://127.0.0.1:8000/';  
-
-const AUTH_BASIC_HEADERS = {
-    headers: {
-      //Authorization: `Basic ${btoa(AUTH_CREDENTIALS)}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Access-Control-Allow-Origin' :'*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-
-    },
-  };
+ const baseURL = 'http://127.0.0.1:8000/';
   
   
   const axiosInstance = axios.create({   
@@ -21,23 +11,21 @@ const AUTH_BASIC_HEADERS = {
     }
   });
   
- /* axiosInstance.interceptors.request.use((request) => {
-    let  token = localStorage.getItem('user');
+ axiosInstance.interceptors.request.use((request) => {
+    let  token = localStorage.getItem('token');
     const hasAuthHeader = request.headers.Authorization;
    
     if (token  && !hasAuthHeader) {
-      setAuthHeader(request);
+      setAuthHeader(request,token);
     }
        return request;
     
    });
-   const setAuthHeader=(request) =>
+   const setAuthHeader=(request,token) =>
     {
-    let  token  = JSON.parse(localStorage.getItem('user'));   
     if (token) {
-      request.headers.common.Authorization = `Bearer ${token.access_token}`;
+      request.headers.common.Authorization = `Bearer ${token}`;
       request.headers.common['Content-Type'] = 'application/json';
-      request.headers.common['Access-Control-Allow-Origin'] = '*';
     }  
   };
   
@@ -63,27 +51,10 @@ const AUTH_BASIC_HEADERS = {
   );
   const refreshToken = (request) =>
   {
-    let  token  = JSON.parse(localStorage.getItem('user')).refresh_token;
-    const params = `grant_type=refresh_token&refresh_token=${
-     token
-    }`;   
-
-    return axios
-      .post(REFRESH_TOKEN_URL, params, AUTH_BASIC_HEADERS)
-      .then((result) => {
-        localStorage.removeItem('user');
-        localStorage.setItem('user', JSON.stringify(result));
-        this.reload();
-        // return this.retry(request);
-      })
-      .catch((errorResponse) => {
-        // if (this.isInvalidToken(errorResponse)) {
-          localStorage.removeItem('user');
-          window.location = "/";
-        // }
-        return errorResponse;
-      });
-  }*/
+   localStorage.removeItem('user');
+   localStorage.removeItem('token');
+   window.location = "/";   
+  };
 
   return axiosInstance;
 };

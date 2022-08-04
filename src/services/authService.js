@@ -1,13 +1,23 @@
+import axiosInstance from '../helpers/axios-orders';
 
-import axiosInstance from '../axios-orders';
 
-
-export const userService = {
-    ListBranch,
+export const authService = {
+    login,   
 };
 
-function ListBranch() { 
-   return axiosInstance()
-    .get('/api/crm_app/companie/list');
-  }
+
+
+function login(username, password) { 
   
+
+  let formData = JSON.stringify({       
+    "username":username,
+    "password":password,
+    }) 
+
+//Falta avatar
+return axiosInstance()
+.post('/api/user_profile_app/login', formData);
+}
+
+
