@@ -23,9 +23,12 @@ export default  (history = null) => {
    });
    const setAuthHeader=(request,token) =>
     {
+      
     if (token) {
       request.headers.common.Authorization = `Bearer ${token}`;
       request.headers.common['Content-Type'] = 'application/json';
+      request.headers.common['Accept'] = '*/*';
+      console.log(request)
     }  
   };
   
