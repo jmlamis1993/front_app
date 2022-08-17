@@ -173,10 +173,10 @@ export const Result = () => {
                         {project.description}
                       </TableCell>
                       <TableCell>
-                      {moment(project.startDate).format('DD/MM/YYYY')}
+                      {moment(project.start).format('DD/MM/YYYY')}
                       </TableCell> 
                       <TableCell>
-                      {moment(project.EndDate).format('DD/MM/YYYY')}
+                      {moment(project.end).format('DD/MM/YYYY')}
                       </TableCell>                 
                       <TableCell>
                         {project.status}

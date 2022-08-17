@@ -20,7 +20,7 @@ function ListProject() {
         "description": event.description,
         "start_date": event.start,
         "finish_date": event.end,
-        "companie": 1,
+        "companie": 6,
         "members": [1],
         "owner": 1
         }) 
@@ -38,7 +38,7 @@ async function UpdateProject(event){
         "description": event.description,
         "start_date": event.start,
         "finish_date": event.end,
-        "companie": 1,
+        "companie": 6,
         "members": [1],
         "owner": 1
         })

@@ -8,7 +8,6 @@ export const authService = {
 
 
 function login(username, password) { 
-  
 
   let formData = JSON.stringify({       
     "username":username,

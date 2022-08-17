@@ -12,7 +12,6 @@ export const startlogin = (username, password) => {
            localStorage.setItem('token', response.data.token.key);        
            dispatch(authLoggin(response.data.user));
            history.push('/');
-
         }
       } catch (error) {
         console.log(error);
@@ -23,4 +22,7 @@ export const startlogin = (username, password) => {
     type: types.authLoggin,
     payload: event,
   });
+
+ 
+
 

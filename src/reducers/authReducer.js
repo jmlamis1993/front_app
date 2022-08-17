@@ -16,6 +16,8 @@ export default (state = initialState, { type, payload }) => {
           loggedIn: false,
           user: {}
           };
+
+
     
   default:
     return state

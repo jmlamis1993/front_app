@@ -47,4 +47,7 @@ export const types = {
     authLogout : '[auth] User Logout',
 
 
+    userLoader:'[user] User Loader'
+
+
 }

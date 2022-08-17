@@ -19,23 +19,9 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { uiCloseModal } from '../../actions/ui';
-
-
-// DataSet
-const project=[
-    {
-      value: 'OJS',
-      label: 'OJS'
-    },
-    {
-      value: 'Microsoft',
-      label: 'Microsoft'
-    },
-    {
-      value: 'Drupal',
-      label: 'Drupal'
-    }, 
-  ];
+import { projectStartLoading } from '../../actions/project';
+import { userStartLoading } from '../../actions/user';
+import { SelectMultipleField } from '../../components/FormFields/SelectMultipleField';
 
   
 export const CalendarForm = ({values}) => {
@@ -46,9 +32,50 @@ export const CalendarForm = ({values}) => {
     const[start,setSartDate]=useState(values.start);
     const[end,setEndDate]=useState(values.end);
     const[descrip,setDescrip]=useState(values.description);
+    const dispatch = useDispatch();
     const {activeEvent} = useSelector(state => state.calendar);
-    const dispatch = useDispatch(); 
+    const {projects} = useSelector(state => state.project);
+    const {users} = useSelector(state => state.user);
+    const [listuser,SetListUsers] = useState([]);
+    const [listproject,SetListProject] = useState([]);
+    useEffect(() => {   
+      let listproject = [];
+      let listuser = [];      
+      if(projects.length !== 0 ){       
+        listproject = projects.map((e)=>({
+          'value': e.id,
+          'label': e.name
+        }));                 
+      }     
+      else{
+        dispatch(projectStartLoading());
+        listproject = projects.map((e)=>({
+          'value': e.id,
+          'label': e.name
+        }));
+      }    
+     SetListProject(listproject);
+    }, [projects]) 
 
+    useEffect(() => {       
+      let listuser = [];      
+      if(users.length !== 0 ){       
+        listuser = users.map((e)=>({
+          'value': e.id,
+          'label': e.name
+        }));                 
+      }     
+      else{
+        dispatch(userStartLoading());        
+        listuser = users.map((e)=>({
+          'value': e.id,
+          'label': e.name
+        }));
+      } 
+     SetListUsers(listuser);   
+    }, [users
+    ]) 
+ 
 
     const handleStartDateChange = (e) =>{
       setSartDate(e);
@@ -68,11 +95,8 @@ export const CalendarForm = ({values}) => {
     }
     const handleCancelClick = () =>{        
           dispatch(uiCloseModal());
-          dispatch(eventClearActiveEvent());      
-        
-    }
-
-
+          dispatch(eventClearActiveEvent());   
+      }
   return (
     <>
      <Formik 
@@ -159,7 +183,7 @@ export const CalendarForm = ({values}) => {
         />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <SelectField size="small" required name='project' label='Project' data={project} fullWidth  variant="outlined" />
+        <SelectField size="small" required name='project' label='Project' data={listproject} fullWidth  variant="outlined" />
         </Grid>     
         <Grid container spacing={2}>
         <Grid item xs={4} >
@@ -187,8 +211,7 @@ export const CalendarForm = ({values}) => {
               variant="outlined"
               value={time_spent}
               onChange={handleTimeSpentChange}            
-
-          />
+/>
         </Grid>
         </Grid>              
           <Typography
@@ -245,8 +268,9 @@ export const CalendarForm = ({values}) => {
         <Grid container spacing={2}>
         <Grid item xs={5} >
         <SelectField size="small" required name='status'  margin="normal" label='Status' data={status} fullWidth  variant="outlined" />
+        </Grid>      
         </Grid>
-        </Grid>
+        <SelectMultipleField  margin="normal" size="small" data={listuser}/>
         <Typography
             color="textPrimary"
             variant="p"
@@ -309,6 +333,7 @@ export const CalendarForm = ({values}) => {
         </Button>
         </Grid>
         </Grid>
+       
        
       </form>
     )}

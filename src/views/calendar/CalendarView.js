@@ -14,6 +14,7 @@ import { eventSetActive, eventStartLoading } from '../../actions/event'
 import { AddNewFab } from '../../components/AddNewFab'
 import { DeleteEventFab } from '../../components/DeleteEventFab'
 
+
 const localizer = momentLocalizer(moment)
 
 export const CalendarView = () => {  
@@ -22,6 +23,8 @@ export const CalendarView = () => {
   const dispatch = useDispatch();
   moment.locale('es');
   const { events , activeEvent} = useSelector(state => state.calendar)
+ 
+  
 
   /*const onDoubleClickEvent = (e) => {
     dispatch(uiOpenModal()); 
