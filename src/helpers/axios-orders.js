@@ -28,7 +28,6 @@ export default  (history = null) => {
       request.headers.common.Authorization = `Bearer ${token}`;
       request.headers.common['Content-Type'] = 'application/json';
       request.headers.common['Accept'] = '*/*';
-      console.log(request)
     }  
   };
   

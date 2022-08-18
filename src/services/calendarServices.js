@@ -47,7 +47,7 @@ async function UpdateEvent(event){
         "start_date" : event.start,
         "finish_date" : event.end,
         "status" : event.status,
-        "proyect": 1,
+        "proyect": event.project,
         "types": event.type,
         "owner":1,
         "tags": [1],
