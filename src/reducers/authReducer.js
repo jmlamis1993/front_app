@@ -16,8 +16,10 @@ export default (state = initialState, { type, payload }) => {
           loggedIn: false,
           user: {}
           };
-
-
+     case types.authChangePassword:
+      {
+       return state
+      }
     
   default:
     return state

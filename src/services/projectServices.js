@@ -8,7 +8,7 @@ export const projectService = {
     DeleteProject
 };
 
-function ListProject() { 
+async function ListProject() { 
    return axiosInstance()
     .get('/api/crm_app/proyect/list');
   }

@@ -8,13 +8,13 @@ export const branchService = {
     DeleteBranch
 };
 
-function ListBranch() { 
+async function ListBranch() { 
    return axiosInstance()
     .get('/api/crm_app/companie/list');
   }
 
   async function AddBranch(event){
-
+    const owner = JSON.parse(localStorage.getItem('user')).id;
     let formData = JSON.stringify({       
         "name":event.name,
         "category":"SELECCION1",
@@ -24,7 +24,7 @@ function ListBranch() {
         "phone_number":event.phone,
         "description":event.description,
         "tags":[1],
-        "owner":"1"
+        "owner":owner
         }) 
    
     //Falta avatar
@@ -34,17 +34,17 @@ function ListBranch() {
 }
 
 async function UpdateBranch(event){
-    
+    const owner = JSON.parse(localStorage.getItem('user')).id;
     let formData = JSON.stringify({       
         "name":event.name,
-        "category":"SELECCION1",
+        "category":event.category,
         "avatar":event.avatar,
         "address":event.address,
         "website":event.website,
         "phone_number":event.phone,
         "description":event.description,
         "tags":[1],
-        "owner":"1"
+        "owner":owner
         }) 
         return axiosInstance()
        .put(`api/crm_app/companie/list/${event.id}`, formData);

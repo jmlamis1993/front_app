@@ -11,6 +11,8 @@ import {
   Typography,
   Grid
 } from "@mui/material";
+import { ChangePassword } from "./ChangePassword";
+import { UserPerfilForm } from "./UserPerfilForm";
 
 const user = {
   avatar: "/static/images/avatars/avatar_6.png",
@@ -25,11 +27,12 @@ export const UserProfile = () => {
   return (
     <Grid container>
       <Grid item xs={4}>
+      <Grid item xs={12}>
         <Card>
           <CardContent>
             <Box alignItems="center" display="flex" flexDirection="column">
               <Avatar className="avatar" src={user.avatar} />
-              <Typography color="textPrimary" gutterBottom variant="h3">
+              <Typography color="textPrimary" gutterBottom variant="h5">
                 {user.name}
               </Typography>
               <Typography color="textSecondary" variant="body1">
@@ -47,6 +50,14 @@ export const UserProfile = () => {
             </Button>
           </CardActions>
         </Card>
+      </Grid>
+      <Grid item xs={12}>
+      <ChangePassword/>
+      </Grid>
+      
+      </Grid>
+      <Grid item xs={8} >
+      <UserPerfilForm/>
       </Grid>
     </Grid>
   );

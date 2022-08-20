@@ -45,6 +45,10 @@ export const types = {
 
     authLoggin : '[auth] User Login',
     authLogout : '[auth] User Logout',
+    authStartChangePassword : '[auth] Change Start Password',
+    authChangePassword : '[auth] Change Password',
+    updateStartPerfinl:  '[auth] Update Start Perfil',
+    updatePerfinl:  '[auth] Update Perfil',
 
 
     userLoader:'[user] User Loader'

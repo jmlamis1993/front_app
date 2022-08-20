@@ -2,6 +2,7 @@
 import { types } from "../types/types";
 import { authService } from "../services/authService";
 import { history } from '../helpers/history';
+import { async } from "q";
 
 export const startlogin = (username, password) => {
     return async (dispatch) => {
@@ -22,7 +23,22 @@ export const startlogin = (username, password) => {
     type: types.authLoggin,
     payload: event,
   });
-
+  export const StartChangePassword = (olpassword, newpassword) =>{
+    return async (dispatch) => {
+      try{
+        const response = await authService.changePassword(olpassword, newpassword);
+        if(response.status === 200){
+          dispatch(ChangePassword());
+        }
+      } catch{
+          console.log('error')
+      }
+    }
+  }
+  
+  const ChangePassword = () => ({
+    type: types.authChangePassword,
+  });
  
 
 

@@ -8,7 +8,7 @@ export const calendarService = {
     DeleteEvent
 };
 
-function ListEvents() { 
+async function ListEvents() { 
    return axiosInstance()
     .get('/api/crm_app/task/list');
   }
