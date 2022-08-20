@@ -22,21 +22,25 @@ import { uiCloseBranchModal } from "../../actions/ui";
 import InputField from "../../components/FormFields/InputField";
 import MarkunreadIcon from "@mui/icons-material/Markunread";
 import { v4 as uuid } from "uuid";
+import { category } from "../../helpers/constants";
+import SelectField from "../../components/FormFields/SelectField";
 
 const initialValues = {
-  name: "",
-  createdAt: "",
-  id_user: "",
-  description: "",
-  avatar: "",
-  phone: "",
-  website: "",
-  address: "",
-  tags: "",
-  contact: {
-    id: 1,
-    username: "Jose Manuel Lamis",
-  },
+  "id": '',
+  "name": '',
+  "category": '',
+  "description": '',         
+  "avatar": '',   
+  "address": '',         
+  "phone": '',                  
+  "tags": '',
+  "website": '',         
+  "contact": [],
+  "user": {
+     _id : '',
+     name: '',
+     email: '',
+     }
 };
 
 export const BranchForm = () => {
@@ -82,8 +86,9 @@ export const BranchForm = () => {
         enableReinitialize={true}
         initialValues={values}
         validationSchema={Yup.object().shape({
-          /*task_name: Yup.string().max(255).required('La contraseña actual es requerida'),     
-        project: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
+        name: Yup.string().max(50).required('Name is a riquired field'),  
+        category : Yup.string().required('Category is a riquired field'),     
+        /*project: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
         time_spent: Yup.string().max(255).required('La nueva contraseña  es requerida'),        
         est_time: Yup.string().max(255).required('Debe confirmar la contraseña').oneOf([Yup.ref("newPassword"), null],"Las contraseñas no coinciden"),
         //description: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
@@ -142,6 +147,18 @@ export const BranchForm = () => {
                   variant="outlined"
                   value={values.name}
                   fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+              <SelectField
+                  size="small"
+                  required
+                  name="category"
+                  margin="normal"
+                  label="Priority"
+                  data={category}
+                  fullWidth
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12}>

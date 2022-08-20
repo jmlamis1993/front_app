@@ -14,6 +14,9 @@ function ListEvents() {
   }
 
   async function AddEvent(event){
+    const owner = JSON.parse(localStorage.getItem('user')).id;    
+    const member = event.member.map((e) => e.id); 
+
     let formData = JSON.stringify({
         "title" : event.task_name,
         "estdate": event.est_time,
@@ -23,11 +26,11 @@ function ListEvents() {
         "start_date" : event.start,
         "finish_date" : event.end,
         "status" : event.status,
-        "proyect": 1,
+        "proyect":event.project,
         "types": event.type,
-        "owner":1,
+        "owner":owner,
         "tags": [1],
-        "user": [1],
+        "user": member,
         }) 
    
     //Falta corregir users  
@@ -38,6 +41,9 @@ function ListEvents() {
 
 async function UpdateEvent(event){
 
+    const owner = JSON.parse(localStorage.getItem('user')).id;    
+    const member = event.member.map((e) => e.id); 
+    
     let formData = JSON.stringify({
         "title" : event.task_name,
         "estdate": event.est_time,
@@ -47,11 +53,11 @@ async function UpdateEvent(event){
         "start_date" : event.start,
         "finish_date" : event.end,
         "status" : event.status,
-        "proyect": event.project,
+        "proyect":event.project,
         "types": event.type,
-        "owner":1,
+        "owner":owner,
         "tags": [1],
-        "user": [1],
+        "user": member,
         })
         return axiosInstance()
        .put(`api/crm_app/task/list/${event.id}`, formData);

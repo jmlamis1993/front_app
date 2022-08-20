@@ -14,15 +14,20 @@ function ListProject() {
   }
 
   async function AddProject(event){
+
+    const members = event.members.map((e) => e.id); 
+    const owner = JSON.parse(localStorage.getItem('user')).id;
+    console.log(owner)
+
     let formData = JSON.stringify({       
         "name": event.name,
         "status": event.status,
         "description": event.description,
         "start_date": event.start,
         "finish_date": event.end,
-        "companie": 6,
-        "members": [1],
-        "owner": 1
+        "companie": event.companie,
+        "members": members,
+        "owner": owner
         }) 
    
     //Falta avatar
@@ -32,15 +37,18 @@ function ListProject() {
 }
 
 async function UpdateProject(event){
+    const members = event.members.map((e) => e.id); 
+    const owner = JSON.parse(localStorage.getItem('user')).id;
+    console.log(owner)
     let formData = JSON.stringify({
         "name": event.name,
         "status": event.status,
         "description": event.description,
         "start_date": event.start,
         "finish_date": event.end,
-        "companie": 6,
-        "members": [1],
-        "owner": 1
+        "companie": event.companie,
+        "members": members,
+        "owner": owner
         })
         return axiosInstance()
        .put(`api/crm_app/proyect/list/${event.id}`, formData);

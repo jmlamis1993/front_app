@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { startlogin } from '../../actions/auth';
 import { useDispatch } from "react-redux";
+import { FlashMessages } from '../../helpers/flotingAlert';
 
 
 
@@ -35,12 +36,14 @@ export  const LoginView = () => {
       alignItems: 'center',
     }}
   >
-   
+      <FlashMessages
+      messages={['hola', "Que bueno verte", 'Gracias']}/>
       <img src='/static/images/login_logo.jpg' alt="logo" className='logo-image' />
  
     <Typography component="h1" variant="h5">
       Sign in
     </Typography>
+
     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
       <TextField
         margin="normal"

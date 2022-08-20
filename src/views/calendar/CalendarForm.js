@@ -36,12 +36,12 @@ export const CalendarForm = ({ values }) => {
   const { users } = useSelector((state) => state.user);
   const [listuser, SetListUsers] = useState([]);
   const [listproject, SetListProject] = useState([]);
-  const [selectedOptions,SetselectedOptions] = useState([]);
-
+  const [selectedOptions, SetselectedOptions] = useState(
+    activeEvent ? activeEvent.member : []
+  );
 
   useEffect(() => {
     let listproject = [];
-    let listuser = [];
     if (projects.length !== 0) {
       listproject = projects.map((e) => ({
         value: e.id,
@@ -120,8 +120,7 @@ const onRemove = (selectedList, removedItem) => {
         start_date: Yup.string().max(255).required('La nueva contraseña  es requerida'),  
         end_date: Yup.string().max(255).required('La nueva contraseña  es requerida'),*/
         })}
-        onSubmit={(values, actions) => {
-          console.log(selectedOptions);
+        onSubmit={(values, actions) => {        
           if (activeEvent) {
             dispatch(
               eventStartUpdate({
@@ -131,6 +130,7 @@ const onRemove = (selectedList, removedItem) => {
                 description: descrip,
                 start: start,
                 end: end,
+                member: selectedOptions,
                 
               })
             );
@@ -143,6 +143,7 @@ const onRemove = (selectedList, removedItem) => {
                 description: descrip,
                 start: start,
                 end: end,
+                member: selectedOptions,
               })
             );
           }
@@ -195,6 +196,7 @@ const onRemove = (selectedList, removedItem) => {
                 <TextField
                   size="small"
                   margin="normal"
+                  InputProps={{ inputProps: { min: 0}}}
                   type="number"
                   name="est_time"
                   label="Est time (hours)"
@@ -208,6 +210,7 @@ const onRemove = (selectedList, removedItem) => {
                 <TextField
                   size="small"
                   margin="normal"
+                  InputProps={{ inputProps: { min: 0}}}
                   type="number"
                   fullWidth
                   name="time_spent"

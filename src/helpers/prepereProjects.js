@@ -14,7 +14,7 @@ export const prepareProjects = ( events = []) => {
          "companie": e.description,
          "members": e.members,          
         "user":{
-         _id : e.owner.id,
+         id : e.owner.id,
          name: e.owner.name,
          email: e.owner.email,
         }

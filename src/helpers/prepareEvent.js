@@ -19,7 +19,8 @@ export const prepareEvent = ( events = []) => {
          "user":{
          id : e.owner.id,
          name: e.owner.name,         
-        }
+        },
+        "member": e.user
       }
    });     
    return eventos;
