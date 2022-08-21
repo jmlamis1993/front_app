@@ -18,3 +18,13 @@ export const uiOpenProjectModal = () => ({
 export const uiCloseProjectModal = () => ({
     type: types.uiCloseProjectModal
 })
+export const uiOpenAlert = (type,sms) => ({
+    type: types.uiOpenAlert,
+    payload : {
+        type : type,
+        sms: sms
+    }
+})
+export const uiCloseAlert = () => ({
+    type: types.uiCloseAlert
+})

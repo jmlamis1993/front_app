@@ -5,6 +5,8 @@ export const types = {
     uiCloseBranchModal:'[ui] Close Branch modal',
     uiOpenProjectModal: '[ui] Open Project modal',
     uiCloseProjectModal:'[ui] Close Project modal',
+    uiOpenAlert:'[ui] Open Alert',
+    uiCloseAlert:'[ui] Close Alert',
 
 
     eventAddNew: '[event] Add new',
@@ -47,8 +49,8 @@ export const types = {
     authLogout : '[auth] User Logout',
     authStartChangePassword : '[auth] Change Start Password',
     authChangePassword : '[auth] Change Password',
-    updateStartPerfinl:  '[auth] Update Start Perfil',
-    updatePerfinl:  '[auth] Update Perfil',
+    authUpdateStartProfile:  '[auth] Update Start Profile',
+    authUpdateProfile:  '[auth] Update Profile',
 
 
     userLoader:'[user] User Loader'

@@ -1,6 +1,8 @@
 
 import { types } from "../types/types";
 import { userService } from "../services/userService";
+import { uiOpenAlert } from "./ui";
+
 
 export const userStartLoading = () =>{
     return async(dispatch) =>{
@@ -11,8 +13,8 @@ export const userStartLoading = () =>{
              dispatch(userLoaded(response.data));
           }       
        } catch (error) {
-          console.log(error); 
-       }
+         dispatch(uiOpenAlert('error',error.response.data.error))   
+      }
     }
  }
  const userLoaded = (event) =>({

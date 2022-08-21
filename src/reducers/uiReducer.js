@@ -4,6 +4,7 @@ const initialState = {
     modalOpen: false,
     modalBranchOpen: false,
     modalProjectOpen: false,
+    activeAlert : false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -38,6 +39,19 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         modalProjectOpen: false
     }
+    case types.uiOpenAlert: {
+       return{
+        ...state,
+        activeAlert: payload
+       }
+    }
+    case types.uiCloseAlert: {
+      return{
+       ...state,
+       activeAlert: false
+      }
+   }
+
 
   default:
     return state;

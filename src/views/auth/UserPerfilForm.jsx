@@ -14,41 +14,45 @@ import {
 } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import InputAdornment from '@mui/material/InputAdornment';
+import { useDispatch, useSelector } from "react-redux";
+import CallIcon from '@mui/icons-material/Call';
+import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
+import InputField from '../../components/FormFields/InputField';
+import { StartUpdateProfile } from '../../actions/auth';
+
+const initialValues = {
+    first_name: '',
+    email: '',
+    address: '',
+    last_name: '',
+    name: '',
+    phone_number:  '',
+    avatar: '',
+}
 
 export const UserPerfilForm = () => {
+    const { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+
   return (
-    <Grid container xs={12} sx={{ marginTop: '7%' }}>
-            <Card>
+    
+            <Card fullWidth justify="center" sx={{marginLeft: '10%',marginRight: '10%' }}>
                 <CardContent>
                     <Formik
 
-                        initialValues={{
-                            first_name: '',
-                            email: '',
-                            address: '',
-                            last_name: '',
-                            name: '',
-                            phone_number:  '',
-
-
-                        }}
+                        initialValues={user}
                         validationSchema={
                             Yup.object().shape({
-                                oldPassword: Yup.string().max(255).required('La contraseña actual es requerida'),
-                                newPassword: Yup.string().max(255).required('La nueva contraseña  es requerida')
-                /*.matches(
-                  "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$",
-                  "Debe contener 8 caracteres, un número y un carácter en mayúsculas y minúsculas"
-                )*/,
-                                confirmPassword: Yup.string().max(255).required('Debe confirmar la contraseña').oneOf([Yup.ref("newPassword"), null], "Las contraseñas no coinciden")
+                              
                             })
                         }
-                    /* onSubmit={(values,actions) => {
-                       setSubmitted(true);
-                       dispatch(userActions.changePassword(values.oldPassword,values.newPassword));            
+                    onSubmit={(values,actions) => {
+                       dispatch(StartUpdateProfile( {avatar: null,...values}));            
                        
                        
-                     }}*/
+                     }}
                     >
                         {({
                             errors,
@@ -70,7 +74,7 @@ export const UserPerfilForm = () => {
 
                                 </Box>
                                 <Grid item >
-                                    <TextField
+                                    <InputField
                                         error={Boolean(touched.name && errors.name)}
                                         fullWidth
                                         helperText={touched.name && errors.name}
@@ -86,7 +90,7 @@ export const UserPerfilForm = () => {
                                     />
                                 </Grid>
                                 <Grid item >
-                                    <TextField
+                                    <InputField
                                         error={Boolean(touched.first_name && errors.first_name)}
                                         fullWidth
                                         helperText={touched.first_name && errors.first_name}
@@ -102,7 +106,7 @@ export const UserPerfilForm = () => {
                                     />
                                 </Grid>
                                 <Grid item >
-                                    <TextField
+                                    <InputField
                                         error={Boolean(touched.last_name && errors.last_name)}
                                         fullWidth
                                         helperText={touched.last_name && errors.last_name}
@@ -117,6 +121,77 @@ export const UserPerfilForm = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
+                                <Grid item >
+                                    <InputField
+                                        error={Boolean(touched.phone_number && errors.phone_number)}
+                                        fullWidth
+                                        helperText={touched.phone_number && errors.phone_number}
+                                        label="Phone Numer"
+                                        InputProps={{
+                                            startAdornment: (
+                                              <InputAdornment position="start">
+                                                  <CallIcon />
+                                              </InputAdornment>
+                                            ),
+                                          }}
+                                        size="small"
+                                        margin="normal"
+                                        name="last_name"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        type="phone"
+                                        value={values.phone_number}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item >
+                                    <InputField
+                                        error={Boolean(touched.email && errors.email)}
+                                        fullWidth
+                                        helperText={touched.email && errors.email}
+                                        label="Email"
+                                        InputProps={{
+                                            startAdornment: (
+                                              <InputAdornment position="start">
+                                                <AlternateEmailIcon />
+                                               
+                                              </InputAdornment>
+                                            ),
+                                          }}
+                                        size="small"
+                                        margin="normal"
+                                        name="last_name"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        type="email"
+                                        value={values.email}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item >
+                                    <InputField
+                                        error={Boolean(touched.address && errors.address)}
+                                        fullWidth
+                                        helperText={touched.address && errors.address}
+                                        label="Address"
+                                        InputProps={{
+                                            startAdornment: (
+                                              <InputAdornment position="start">
+                                                <MarkAsUnreadIcon />
+                                              </InputAdornment>
+                                            ),
+                                          }}
+                                        size="small"
+                                        margin="normal"
+                                        name="address"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        type="text"
+                                        value={values.address}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                
                     
                                 <Grid item>
                                     <Box my={2} >
@@ -138,6 +213,6 @@ export const UserPerfilForm = () => {
 
                 </CardContent>
             </Card>
-        </Grid>
+      
   )
 }

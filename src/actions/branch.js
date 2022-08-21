@@ -1,6 +1,8 @@
 import { types } from "../types/types";
 import { branchService } from "../services/branchService";
 import { prepareBranch } from "../helpers/prepareBranch";
+import { uiOpenAlert } from "./ui";
+
 
 export const branchStartLoading = () => {
   return async (dispatch) => {
@@ -11,7 +13,7 @@ export const branchStartLoading = () => {
         dispatch(branchLoaded(branch));
       }
     } catch (error) {
-      console.log(error);
+      dispatch(uiOpenAlert('error',error.response.data.error))  
     }
   };
 };
@@ -42,7 +44,7 @@ export const branchStartAddNew = (event) => {
         //dispatch(uiCloseProjectModal());
       }
     } catch (error) {
-      console.log(error);
+      dispatch(uiOpenAlert('error',error.response.data.error))  
     }
   };
 };
@@ -62,7 +64,7 @@ export const branchStartUpdate = (event) => {
         dispatch(branchUpdate(event));
       }
     } catch (error) {
-      console.log(error);
+      dispatch(uiOpenAlert('error',error.response.data.error))  
     }
   };
 };
@@ -84,7 +86,7 @@ export const branchStartDelete = () => {
         dispatch(branchClearActiveEvent());
       }
     } catch (error) {
-      console.log(error);
+      dispatch(uiOpenAlert('error',error.response.data.error))  
     }
   };
 };

@@ -192,6 +192,7 @@ export const ProjectForm = () => {
               <Grid item xs={12}>
                 <SelectField
                   size="small"
+                  value ={values.companie}
                   required
                   name="companie"
                   label="Company"

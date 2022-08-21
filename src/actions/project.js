@@ -2,6 +2,8 @@ import { types } from "../types/types";
 import { projectService } from "../services/projectServices";
 import { prepareProjects } from "../helpers/prepereProjects";
 import { uiCloseProjectModal } from "./ui";
+import { uiOpenAlert } from "./ui";
+
 
 
 
@@ -27,7 +29,7 @@ export const projectStartAddNew = (event) => {
        }     
        
     } catch (error) {
-       console.log(error);  
+      dispatch(uiOpenAlert('error',error.response.data.error))   
     }
    }
 };
@@ -41,7 +43,7 @@ export const projectStartLoading = () =>{
             dispatch(projectLoaded(projects));
          }       
       } catch (error) {
-         console.log(error); 
+         dispatch(uiOpenAlert('error',error.response.data.error))  
       }
    }
 }
@@ -69,7 +71,7 @@ export const projectStartUpdate = (event) =>{
          }     
          
       } catch (error) {
-         console.log(error);  
+         dispatch(uiOpenAlert('error',error.response.data.error))  
       }
      }
 }
@@ -95,7 +97,7 @@ const projectDelete= (id) => ({
          }
          
       } catch (error) {
-         console.log(error);  
+         dispatch(uiOpenAlert('error',error.response.data.error))  
       }
      }
 }

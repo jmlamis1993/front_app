@@ -17,7 +17,7 @@ async function ListBranch() {
     const owner = JSON.parse(localStorage.getItem('user')).id;
     let formData = JSON.stringify({       
         "name":event.name,
-        "category":"SELECCION1",
+        "category": event.category,
         "avatar":event.avatar,
         "address":event.address,
         "website":event.website,

@@ -2,7 +2,7 @@
 import { types } from "../types/types";
 import { authService } from "../services/authService";
 import { history } from '../helpers/history';
-import { async } from "q";
+import { uiOpenAlert } from "./ui";
 
 export const startlogin = (username, password) => {
     return async (dispatch) => {
@@ -15,7 +15,7 @@ export const startlogin = (username, password) => {
            history.push('/');
         }
       } catch (error) {
-        console.log(error);
+        dispatch(uiOpenAlert('error',error.response.data.error))       
       }
     };
   };
@@ -29,15 +29,34 @@ export const startlogin = (username, password) => {
         const response = await authService.changePassword(olpassword, newpassword);
         if(response.status === 200){
           dispatch(ChangePassword());
-        }
-      } catch{
-          console.log('error')
+          dispatch(uiOpenAlert('success', 'Your password have been changed'))
+         }
+      } catch(error){
+        dispatch(uiOpenAlert('error',error.response.data.error))  
       }
     }
   }
   
   const ChangePassword = () => ({
     type: types.authChangePassword,
+  });
+  export const StartUpdateProfile = (user) =>{
+    return async (dispatch) => {
+      try{
+        const response = await authService.updateProfile(user);
+        if(response.status === 200){
+          dispatch(UpdateProfile(user));
+          localStorage.setItem('user', JSON.stringify(response.data.user)); 
+        }
+      } catch(error){
+        dispatch(uiOpenAlert('error',error.response.data.error))  
+      }
+    }
+  }
+  
+  const UpdateProfile = (user) => ({
+    type: types.authUpdateProfile,
+    payload: user
   });
  
 

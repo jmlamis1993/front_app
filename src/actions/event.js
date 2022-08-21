@@ -1,6 +1,8 @@
 import { types } from "../types/types";
 import { calendarService } from "../services/calendarServices";
 import { prepareEvent } from "../helpers/prepareEvent";
+import { uiOpenAlert } from "./ui";
+
 
 
 export const eventStartAddNew = (event) => { 
@@ -20,7 +22,7 @@ export const eventStartAddNew = (event) => {
          }     
          
       } catch (error) {
-         console.log(error);  
+         dispatch(uiOpenAlert('error',error.response.data.error))  
       }
      }
 };
@@ -36,7 +38,7 @@ export const eventStartLoading = () =>{
          }           
          
       } catch (error) {
-         
+         dispatch(uiOpenAlert('error',error.response.data.error))  
       }
    }
 }
@@ -64,7 +66,7 @@ export const eventStartUpdate = (event) =>{
          }     
          
       } catch (error) {
-         console.log(error);  
+         dispatch(uiOpenAlert('error',error.response.data.error))  
       }
      }
 }
@@ -84,7 +86,7 @@ export const eventStartDelete = () => {
          }     
          
       } catch (error) {
-         console.log(error);  
+         dispatch(uiOpenAlert('error',error.response.data.error))   
       }
      }
 }

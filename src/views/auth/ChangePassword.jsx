@@ -23,8 +23,8 @@ export const ChangePassword = () => {
 
     const dispatch = useDispatch();
     return (
-        <Grid container xs={12} sx={{ marginTop: '7%' }}>
-            <Card>
+       
+            <Card sx={{ marginTop: '7%' }}>
                 <CardContent>
                     <Formik
 
@@ -138,6 +138,6 @@ export const ChangePassword = () => {
 
                 </CardContent>
             </Card>
-        </Grid>
+        
     )
 }

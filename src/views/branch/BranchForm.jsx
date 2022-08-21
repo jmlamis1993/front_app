@@ -25,6 +25,7 @@ import { v4 as uuid } from "uuid";
 import { category } from "../../helpers/constants";
 import SelectField from "../../components/FormFields/SelectField";
 
+
 const initialValues = {
   "id": '',
   "name": '',
@@ -58,7 +59,7 @@ export const BranchForm = () => {
     } else {
       setFieldValue(initialValues);
     }
-  }, [activeEvent, setFieldValue]);
+  }, [activeEvent]);
 
   const handleDeleteClick = () => { 
       dispatch(uiCloseBranchModal());  
@@ -155,7 +156,7 @@ export const BranchForm = () => {
                   required
                   name="category"
                   margin="normal"
-                  label="Priority"
+                  label="Category"
                   data={category}
                   fullWidth
                   variant="outlined"

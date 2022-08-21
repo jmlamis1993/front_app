@@ -20,7 +20,10 @@ export default (state = initialState, { type, payload }) => {
       {
        return state
       }
-    
+      case types.authUpdateProfile:
+      {
+       return {...state, user: payload}
+      }
   default:
     return state
   }

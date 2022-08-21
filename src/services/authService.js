@@ -3,7 +3,8 @@ import axiosInstance from '../helpers/axios-orders';
 
 export const authService = {
     login, 
-    changePassword,  
+    changePassword,
+    updateProfile,  
 };
 
 
@@ -29,5 +30,23 @@ async function changePassword(oldPassword, newPassword) {
 //Falta avatar
 return axiosInstance()
 .put(`/api/user_profile_app/users/change_password/${id}`, formData);
+}
+
+async function updateProfile(user) { 
+  const id = JSON.parse(localStorage.getItem('user')).id;
+  console.log(user);
+  let formData = JSON.stringify({       
+    'email': user.email,
+    'name': user.name,
+    'first_name': user.first_name,
+    'last_name': user.last_name,
+    'role': user.role,
+    'address': user.address,
+    'avatar': null,
+    'phone_number': user.phone_number
+    }) 
+    console.log(formData);
+return axiosInstance()
+.put(`/api/user_profile_app/users/${id}`, formData);
 }
 
