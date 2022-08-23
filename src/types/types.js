@@ -45,6 +45,12 @@ export const types = {
     projectClearSearch : '[project] Clear project search',
     projectLoader : '[project] Project Loader',
 
+
+    tagAddNew: '[tag] Add new',
+    tagStartAddNew: '[tag] Start Add new',
+    tagLoader : '[tag] tag Loader',
+
+
     authLoggin : '[auth] User Login',
     authLogout : '[auth] User Logout',
     authStartChangePassword : '[auth] Change Start Password',

@@ -22,6 +22,8 @@ import { uiCloseModal } from "../../actions/ui";
 import { projectStartLoading } from "../../actions/project";
 import { userStartLoading } from "../../actions/user";
 import Multiselect from "multiselect-react-dropdown";
+import { tagsStartLoading } from "../../actions/tag";
+import { TagForm } from "./TagForm";
 
 export const CalendarForm = ({ values }) => {
   const [time_spent, setTime_spent] = useState(values.time_spent);
@@ -34,11 +36,18 @@ export const CalendarForm = ({ values }) => {
   const { activeEvent } = useSelector((state) => state.calendar);
   const { projects } = useSelector((state) => state.project);
   const { users } = useSelector((state) => state.user);
+  const { tags } = useSelector((state) => state.tag);
   const [listuser, SetListUsers] = useState([]);
   const [listproject, SetListProject] = useState([]);
   const [selectedOptions, SetselectedOptions] = useState(
     activeEvent ? activeEvent.member : []
   );
+  const [selectedTags, SetSelectedTags] = useState(
+    activeEvent ? activeEvent.member : []
+  );
+  const [listTags, SetListTags] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState();
 
   useEffect(() => {
     let listproject = [];
@@ -56,7 +65,22 @@ export const CalendarForm = ({ values }) => {
     }
     SetListProject(listproject);
   }, [projects]);
-
+  useEffect(() => {
+    let listTags = [];
+    if (tags.length !== 0) {
+      listTags = tags.map((e) => ({
+        name: e.name,
+        id: e.id,
+      }));
+    } else {
+      dispatch(tagsStartLoading());
+      listTags = tags.map((e) => ({
+        name: e.name,
+        id: e.id,
+      }));
+    }   
+    SetListTags(listTags);
+  }, [tags]);
   useEffect(() => {
     let listuser = [];
     if (users.length !== 0) {
@@ -91,7 +115,14 @@ const onRemove = (selectedList, removedItem) => {
    const opt = selectedOptions.filter( e => (e.id !== removedItem.id));
    SetselectedOptions(opt);    
 }
-  
+const onSelectTags = (selectedList, selectedItem) => {
+  SetSelectedTags([...selectedTags, selectedItem]);
+}
+
+const onRemoveTags = (selectedList, removedItem) => {
+const opt = selectedTags.filter( e => (e.id !== removedItem.id));
+SetSelectedTags(opt);    
+}
   const handleTimeEstChange = (e) => {
     setEst_time(e.target.value);
   };
@@ -101,6 +132,14 @@ const onRemove = (selectedList, removedItem) => {
   const handleCancelClick = () => {
     dispatch(uiCloseModal());
     dispatch(eventClearActiveEvent());
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
   };
   return (
     <>
@@ -241,23 +280,20 @@ const onRemove = (selectedList, removedItem) => {
                   //console.log( 'Focus.', editor );
                 }}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                size="small"
-                error={Boolean(touched.tags && errors.tags)}
-                fullWidth
-                helperText={touched.tags && errors.tags}
-                label="Tag"
-                margin="normal"
-                name="tags"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                type="text"
-                value={values.tags}
-                variant="outlined"
-              />
-            </Grid>
+            </Grid>            
+          <Grid item xs={12} sx={{marginTop:'10px'}}>
+            <Typography color="textPrimary" variant="p" size="small">
+              Tags
+            </Typography>
+                <Multiselect
+                  options={listTags} // Options to display in the dropdown
+                  selectedValues={selectedTags}
+                  onSelect={onSelectTags} // Function will trigger on select event
+                  onRemove={onRemoveTags} // Function will trigger on remove event
+                  displayValue="name" // Property name to display in the dropdown options
+                />
+                <Button size="small" onClick={handleClickOpen}>Create New Tag</Button>
+              </Grid>
             <Grid container spacing={2}>
               <Grid item xs={5}>
                 <SelectField
@@ -297,7 +333,10 @@ const onRemove = (selectedList, removedItem) => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sx={{marginBottom:'10px'}}>
+              <Typography color="textPrimary" variant="p" size="small">
+              Members
+            </Typography>
                 <Multiselect
                   options={listuser} // Options to display in the dropdown
                   selectedValues={selectedOptions}
@@ -307,6 +346,7 @@ const onRemove = (selectedList, removedItem) => {
                 />
               </Grid>
             </Grid>
+            
             <Typography color="textPrimary" variant="p">
               Date
             </Typography>
@@ -388,6 +428,11 @@ const onRemove = (selectedList, removedItem) => {
           </form>
         )}
       </Formik>
+      <TagForm
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleCloseDialog}
+      />
     </>
   );
 };

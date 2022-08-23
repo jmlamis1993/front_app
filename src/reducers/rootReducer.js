@@ -5,6 +5,7 @@ import branchReducer from "./branchReducer"
 import projectReducer from "./projectReducer";
 import  authReducer  from "./authReducer";
 import  userReducer  from "./userReducer";
+import tagReducer  from './tagReducer'
 
 
 export const rootReducer = combineReducers({
@@ -13,7 +14,7 @@ export const rootReducer = combineReducers({
     branch : branchReducer,
     project : projectReducer,
     auth : authReducer,
-    user : userReducer
-    //TODO:AuthReducer
-    //TODO:CalendarReducer
+    user : userReducer,
+    tag : tagReducer
+   
 })

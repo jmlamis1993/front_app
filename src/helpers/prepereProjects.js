@@ -1,8 +1,7 @@
 import moment from 'moment'
 
 export const prepareProjects = ( events = []) => {
-
-   const eventos = events.map(function(e){
+   const eventos = events.map(function(e){    
     
       return {
          "id": e.id,
