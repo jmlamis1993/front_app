@@ -5,9 +5,10 @@
       sx: {
         bgcolor: stringToColor(name),
         width: '34px',
-        height: '34px'
+        height: '34px',
+        
       },
-      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`.toUpperCase(),
     };
   }
 const stringToColor = (string) => {

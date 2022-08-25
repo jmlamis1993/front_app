@@ -21,6 +21,8 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import { Outlet } from "react-router-dom";
 import { stringAvatar } from "../../helpers/stringAvatar";
 import { useDispatch, useSelector } from "react-redux";
+import { Logout } from '../../components/Logout';
+
 
 const drawerWidth = 240;
 
@@ -133,9 +135,10 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {mainListItems}            
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
+            <Logout/>
           </List>
         </Drawer>
         <Box

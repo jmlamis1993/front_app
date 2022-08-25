@@ -9,11 +9,11 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import FolderIcon from '@mui/icons-material/Folder';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import LogoutIcon from '@mui/icons-material/Logout';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import { NavLink as RouterLink } from 'react-router-dom';
 
-export const mainListItems = (
+
+export const mainListItems = ( 
   <React.Fragment>
     <ListItemButton  component={RouterLink}  to='/app/home'>
       <ListItemIcon>
@@ -65,12 +65,8 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="User Profile" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="Logout" />
-    </ListItemButton>
+   
+    
 
   </React.Fragment>
 );

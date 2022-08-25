@@ -52,7 +52,6 @@ export const types = {
     tagStartAddNew: '[tag] Start Add new',
     tagLoader : '[tag] tag Loader',
 
-
     authLoggin : '[auth] User Login',
     authLogout : '[auth] User Logout',
     authStartChangePassword : '[auth] Change Start Password',
@@ -60,8 +59,7 @@ export const types = {
     authUpdateStartProfile:  '[auth] Update Start Profile',
     authUpdateProfile:  '[auth] Update Profile',
 
-
-    userLoader:'[user] User Loader'
-
+    userLoader:'[user] User Loader',
+  
 
 }

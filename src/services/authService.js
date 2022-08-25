@@ -3,6 +3,7 @@ import axiosInstance from '../helpers/axios-orders';
 
 export const authService = {
     login, 
+    logout,
     changePassword,
     updateProfile,  
 };
@@ -19,6 +20,10 @@ async function login(username, password) {
 //Falta avatar
 return axiosInstance()
 .post('/api/user_profile_app/login', formData);
+}
+async function logout() { 
+return axiosInstance()
+.get('/api/user_profile_app/logout');
 }
 
 async function changePassword(oldPassword, newPassword) { 

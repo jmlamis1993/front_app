@@ -59,5 +59,22 @@ export const startlogin = (username, password) => {
     payload: user
   });
  
-
+  export const startLogout = (username, password) => {
+    return async (dispatch) => {
+      try {
+        const response = await authService.logout();
+        if (response.status === 200) {  
+           localStorage.removeItem('user');  
+           localStorage.removeItem('token');        
+           dispatch(authLogout());
+           history.push('/');
+        }
+      } catch (error) {
+        dispatch(uiOpenAlert('error',error.response.data.error))       
+      }
+    };
+  };
+  const authLogout = () => ({
+    type: types.authLogout,   
+  });
 
