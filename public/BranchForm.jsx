@@ -28,10 +28,6 @@ import SelectField from "../../components/FormFields/SelectField";
 import Multiselect from "multiselect-react-dropdown";
 import { tagsStartLoading } from "../../actions/tag";
 import { TagForm } from "../calendar/TagForm";
-import {
-  uiCloseModalTags,
-  uiOpenModalTags
-} from "../../actions/ui";
 
 
 const initialValues = {
@@ -64,10 +60,9 @@ export const BranchForm = () => {
     setOpen(true);
   };
   const handleCloseDialog = (value) => {
-    dispatch(uiCloseModalTags())
+    setOpen(false);
     setSelectedValue(value);
   };
-  const { activeModalTags } = useSelector((state) => state.ui);
   const [file, setFile] = useState();
   const [selectedTags, SetSelectedTags] = useState(
     activeEvent ? activeEvent.member : []
@@ -153,8 +148,7 @@ const handleAvatar = (e) => {
   const opt = selectedTags.filter( e => (e.id !== removedItem.id));
   SetSelectedTags(opt);    
   }
-  const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+ 
 
   return (
     <>
@@ -163,11 +157,17 @@ const handleAvatar = (e) => {
         initialValues={values}
         validationSchema={Yup.object().shape({
         name: Yup.string().max(50).required('Name is a riquired field'),  
-        category : Yup.string().required('Category is a riquired field'),   
-        website : Yup.string().matches(re,'URL is not valid'),  
-        phone : Yup.string().matches(phoneRegExp, 'Phone number is not valid'),  
-        address : Yup.string().max(255),    
-
+        category : Yup.string().required('Category is a riquired field'),     
+        /*project: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
+        time_spent: Yup.string().max(255).required('La nueva contraseña  es requerida'),        
+        est_time: Yup.string().max(255).required('Debe confirmar la contraseña').oneOf([Yup.ref("newPassword"), null],"Las contraseñas no coinciden"),
+        //description: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
+        tags: Yup.string().max(255).required('La nueva contraseña  es requerida'),
+        priority: Yup.string().max(255).required('La nueva contraseña  es requerida'),
+        type: Yup.string().max(255).required('La nueva contraseña  es requerida'),
+        status: Yup.string().max(255).required('La nueva contraseña  es requerida'),  
+        start_date: Yup.string().max(255).required('La nueva contraseña  es requerida'),  
+        end_date: Yup.string().max(255).required('La nueva contraseña  es requerida'),*/
         })}
         onSubmit={(values, actions) => {
           if (activeEvent) {
@@ -244,6 +244,7 @@ const handleAvatar = (e) => {
                 <br />
                 <InputField
                   variant="outlined"
+                  required
                   name="file"
                   onChange={(e) => onSelectFile(e)}
                   id="file"
@@ -374,7 +375,7 @@ const handleAvatar = (e) => {
       </Formik>
       <TagForm
         selectedValue={selectedValue}
-        open={activeModalTags}
+        open={open}
         onClose={handleCloseDialog}
       />
      

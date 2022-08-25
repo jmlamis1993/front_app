@@ -152,17 +152,15 @@ SetSelectedTags(opt);
         enableReinitialize={true}
         initialValues={values}
         validationSchema={Yup.object().shape({
-          /*task_name: Yup.string().max(255).required('La contraseña actual es requerida'),     
-        project: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
-        time_spent: Yup.string().max(255).required('La nueva contraseña  es requerida'),        
-        est_time: Yup.string().max(255).required('Debe confirmar la contraseña').oneOf([Yup.ref("newPassword"), null],"Las contraseñas no coinciden"),
-        //description: Yup.string().max(255).required('La nueva contraseña  es requerida'), 
-        tags: Yup.string().max(255).required('La nueva contraseña  es requerida'),
-        priority: Yup.string().max(255).required('La nueva contraseña  es requerida'),
-        type: Yup.string().max(255).required('La nueva contraseña  es requerida'),
-        status: Yup.string().max(255).required('La nueva contraseña  es requerida'),  
-        start_date: Yup.string().max(255).required('La nueva contraseña  es requerida'),  
-        end_date: Yup.string().max(255).required('La nueva contraseña  es requerida'),*/
+        task_name: Yup.string().max(255).required('title is a required field'),  
+        priority: Yup.string().required('priority is a required field'), 
+        start_date: Yup.date().required('start_date is a required field'),  
+        end_date: Yup.date().required('end_date is a required field'),
+        type: Yup.string().required('type is a required field'),
+        status: Yup.string().required('status is a required field'),  
+        project: Yup.string().required('You should be a project'), 
+        /*     
+        tags: Yup.string().max(255).required('La nueva contraseña  es requerida') */
         })}
         onSubmit={(values, actions) => {        
           if (activeEvent) {
