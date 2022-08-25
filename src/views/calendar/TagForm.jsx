@@ -9,6 +9,11 @@ import InputField from "../../components/FormFields/InputField";
 import { useDispatch } from "react-redux";
 import { tagsStartAddNew } from '../../actions/tag';
 
+const initialValues = {  
+  "name": '', 
+};
+
+
 export const TagForm = (props) => {
  
      const { onClose, selectedValue, open } = props;
@@ -24,6 +29,7 @@ export const TagForm = (props) => {
           <DialogTitle>Add New Tag</DialogTitle>
           <Formik
         enableReinitialize={true}
+        initialValues={initialValues}
         validationSchema={Yup.object().shape({
         name: Yup.string().max(50).required('Should be a tag valid'),     
       

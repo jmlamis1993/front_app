@@ -6,6 +6,12 @@ export const uiOpenModal = () => ({
 export const uiCloseModal = () => ({
     type: types.uiCloseModal
 })
+export const uiOpenModalTags = () => ({
+    type: types.uiOpenModalTags
+})
+export const uiCloseModalTags = () => ({
+    type: types.uiCloseModalTags
+})
 export const uiOpenBranchModal = () => ({
     type: types.uiOpenBranchModal
 })

@@ -7,6 +7,8 @@ export const types = {
     uiCloseProjectModal:'[ui] Close Project modal',
     uiOpenAlert:'[ui] Open Alert',
     uiCloseAlert:'[ui] Close Alert',
+    uiOpenModalTags:'[ui] Open Madal Tags',
+    uiCloseModalTags:'[ui] Close Madal Tags',
 
 
     eventAddNew: '[event] Add new',

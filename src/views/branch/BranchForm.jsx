@@ -24,7 +24,9 @@ import MarkunreadIcon from "@mui/icons-material/Markunread";
 import { v4 as uuid } from "uuid";
 import { category } from "../../helpers/constants";
 import SelectField from "../../components/FormFields/SelectField";
-
+import Multiselect from "multiselect-react-dropdown";
+import { tagsStartLoading } from "../../actions/tag";
+import { TagForm } from "../calendar/TagForm";
 
 const initialValues = {
   "id": '',
@@ -34,7 +36,7 @@ const initialValues = {
   "avatar": '',   
   "address": '',         
   "phone": '',                  
-  "tags": '',
+  "tags": [],
   "website": '',         
   "contact": [],
   "user": {
@@ -51,7 +53,37 @@ export const BranchForm = () => {
   const [descript, setDescription] = useState(
     activeEvent ? activeEvent.description : ""
   );
+  const { tags } = useSelector((state) => state.tag);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleCloseDialog = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
   const [file, setFile] = useState();
+  const [selectedTags, SetSelectedTags] = useState(
+    activeEvent ? activeEvent.member : []
+  );
+  const [listTags, SetListTags] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState();
+  useEffect(() => {
+    let listTags = [];
+    if (tags.length !== 0) {
+      listTags = tags.map((e) => ({
+        name: e.name,
+        id: e.id,
+      }));
+    } else {
+      dispatch(tagsStartLoading());
+      listTags = tags.map((e) => ({
+        name: e.name,
+        id: e.id,
+      }));
+    }   
+    SetListTags(listTags);
+  }, [tags]);
 
   useEffect(() => {
     if (activeEvent) {
@@ -68,7 +100,14 @@ export const BranchForm = () => {
   const handleDescription = (e) => {
     setDescription(e);
   };
- 
+  const onSelectTags = (selectedList, selectedItem) => {
+    SetSelectedTags([...selectedTags, selectedItem]);
+  }
+  
+  const onRemoveTags = (selectedList, removedItem) => {
+  const opt = selectedTags.filter( e => (e.id !== removedItem.id));
+  SetSelectedTags(opt);    
+  }
   const handleAvatar = (e) => {
     const aux = e.target.files[0];
     const fileReader = new FileReader();
@@ -182,17 +221,21 @@ export const BranchForm = () => {
                   type="file"
                   inputProps={{ accept: ".png,.jpg,.jpeg" }}
                 />
-                <Grid item xs={12}>
-                  <InputField
-                    size="small"
-                    margin="normal"
-                    type="text"
-                    name="tags"
-                    label="tags"
-                    variant="outlined"
-                    value={values.tags}
-                    fullWidth
-                  />
+                <Grid item xs={12} sx={{marginTop:'10px'}}>
+            <Typography color="textPrimary" variant="p" size="small">
+              Tags
+            </Typography>
+                <Multiselect
+                  options={listTags} // Options to display in the dropdown
+                  selectedValues={selectedTags}
+                  onSelect={onSelectTags} // Function will trigger on select event
+                  onRemove={onRemoveTags} // Function will trigger on remove event
+                  displayValue="name" // Property name to display in the dropdown options
+                />
+                </Grid>
+                <Grid>
+                <Button size="small" onClick={handleClickOpen}>Create New Tag</Button>
+              </Grid>
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={4}>
@@ -234,7 +277,7 @@ export const BranchForm = () => {
                     />
                   </Grid>
                 </Grid>
-              </Grid>
+              
               <Grid item xs={12}>
                 <Grid container>
                   <Grid item xs={8}>
@@ -288,6 +331,12 @@ export const BranchForm = () => {
           </form>
         )}
       </Formik>
+      <TagForm
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleCloseDialog}
+      />
+     
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { types } from "../types/types";
-import { uiOpenAlert } from "./ui"; 
+import { uiOpenAlert, uiCloseModalTags } from "./ui"; 
 import { tagService } from "../services/tagService";
 
 const tagsAddNew = (event) => ({
@@ -14,8 +14,8 @@ export const tagsStartAddNew = (event) => {
        if(response.status === 201){          
          const tag = response.data;     
          dispatch(tagsAddNew(tag));
-         //dispatch(uiCloseProjectModal());    
-       }     
+         dispatch(uiCloseModalTags());
+      }     
        
     } catch (error) {
       dispatch(uiOpenAlert('error',error.response.data.error))   

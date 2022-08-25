@@ -43,7 +43,8 @@ async function UpdateEvent(event){
 
     const owner = JSON.parse(localStorage.getItem('user')).id;    
     const member = event.member.map((e) => e.id); 
-    
+    const tags = event.tags.map((e) => e.id);
+
     let formData = JSON.stringify({
         "title" : event.task_name,
         "estdate": event.est_time,
@@ -56,7 +57,7 @@ async function UpdateEvent(event){
         "proyect":event.project,
         "types": event.type,
         "owner":owner,
-        "tags": [1],
+        "tags": tags,
         "user": member,
         })
         return axiosInstance()

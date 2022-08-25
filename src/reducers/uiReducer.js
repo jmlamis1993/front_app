@@ -1,59 +1,68 @@
-import { types } from "../types/types"
+import { types } from "../types/types";
 
 const initialState = {
-    modalOpen: false,
-    modalBranchOpen: false,
-    modalProjectOpen: false,
-    activeAlert : false
-}
+  modalOpen: false,
+  modalBranchOpen: false,
+  modalProjectOpen: false,
+  activeAlert: false,
+  activeModalTags: false,
+};
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-  case types.uiOpenModal:
-    return { 
+    case types.uiOpenModal:
+      return {
         ...state,
-        modalOpen: true
-    }
+        modalOpen: true,
+      };
     case types.uiCloseModal:
-        return { 
-            ...state,
-            modalOpen: false
-        }
+      return {
+        ...state,
+        modalOpen: false,
+      };
+    case types.uiOpenModalTags:
+      return {
+        ...state,
+        activeModalTags: true,
+      };
+    case types.uiCloseModalTags:
+      return {
+        ...state,
+        activeModalTags: false,
+      };
     case types.uiOpenBranchModal:
-      return { 
+      return {
         ...state,
-        modalBranchOpen: true
-    }
+        modalBranchOpen: true,
+      };
     case types.uiCloseBranchModal:
-      return { 
+      return {
         ...state,
-        modalBranchOpen: false
-    }
+        modalBranchOpen: false,
+      };
     case types.uiOpenProjectModal:
-      return { 
+      return {
         ...state,
-        modalProjectOpen: true
-    }
+        modalProjectOpen: true,
+      };
     case types.uiCloseProjectModal:
-      return { 
+      return {
         ...state,
-        modalProjectOpen: false
-    }
+        modalProjectOpen: false,
+      };
     case types.uiOpenAlert: {
-       return{
+      return {
         ...state,
-        activeAlert: payload
-       }
+        activeAlert: payload,
+      };
     }
     case types.uiCloseAlert: {
-      return{
-       ...state,
-       activeAlert: false
-      }
-   }
-
-
-  default:
-    return state;
+      return {
+        ...state,
+        activeAlert: false,
+      };
+    }
+    default:
+      return state;
   }
-}
+};

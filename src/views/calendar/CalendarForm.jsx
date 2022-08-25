@@ -14,11 +14,16 @@ import {
   eventDeleted,
   eventStartUpdate,
 } from "../../actions/event";
+import {
+  uiCloseModalTags,
+  uiOpenModalTags
+} from "../../actions/ui";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { uiCloseModal } from "../../actions/ui";
+import { uiCloseModal} from "../../actions/ui";
 import { projectStartLoading } from "../../actions/project";
 import { userStartLoading } from "../../actions/user";
 import Multiselect from "multiselect-react-dropdown";
@@ -28,6 +33,7 @@ import { TagForm } from "./TagForm";
 export const CalendarForm = ({ values }) => {
   const [time_spent, setTime_spent] = useState(values.time_spent);
   const [est_time, setEst_time] = useState(values.est_time);
+  const { activeModalTags } = useSelector((state) => state.ui);
   const now = moment().minutes(0).seconds(0).add(1, "hours");
   const [start, setSartDate] = useState(values.start);
   const [end, setEndDate] = useState(values.end);
@@ -45,8 +51,7 @@ export const CalendarForm = ({ values }) => {
   const [selectedTags, SetSelectedTags] = useState(
     activeEvent ? activeEvent.member : []
   );
-  const [listTags, SetListTags] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [listTags, SetListTags] = useState([]); 
   const [selectedValue, setSelectedValue] = useState();
 
   useEffect(() => {
@@ -134,11 +139,11 @@ SetSelectedTags(opt);
     dispatch(eventClearActiveEvent());
   };
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch(uiOpenModalTags())
   };
 
   const handleCloseDialog = (value) => {
-    setOpen(false);
+    dispatch(uiCloseModalTags())
     setSelectedValue(value);
   };
   return (
@@ -170,6 +175,7 @@ SetSelectedTags(opt);
                 start: start,
                 end: end,
                 member: selectedOptions,
+                tags: selectedTags
                 
               })
             );
@@ -183,6 +189,7 @@ SetSelectedTags(opt);
                 start: start,
                 end: end,
                 member: selectedOptions,
+                tags: selectedTags
               })
             );
           }
@@ -430,7 +437,7 @@ SetSelectedTags(opt);
       </Formik>
       <TagForm
         selectedValue={selectedValue}
-        open={open}
+        open={activeModalTags}
         onClose={handleCloseDialog}
       />
     </>
