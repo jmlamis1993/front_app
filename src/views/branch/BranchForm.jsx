@@ -68,6 +68,9 @@ export const BranchForm = () => {
   const [listTags, SetListTags] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState()
+
   useEffect(() => {
     let listTags = [];
     if (tags.length !== 0) {
@@ -93,6 +96,41 @@ export const BranchForm = () => {
     }
   }, [activeEvent]);
 
+  useEffect(() => {
+    if (!selectedFile) {
+        setPreview(undefined)
+        return
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setPreview(objectUrl)
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl)
+}, [selectedFile])
+
+const onSelectFile = e => {
+    if (!e.target.files || e.target.files.length === 0) {
+        setSelectedFile(undefined)
+        return
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setSelectedFile(e.target.files[0])
+    handleAvatar(e);
+}
+const handleAvatar = (e) => {
+  const aux = e.target.files[0];
+  const fileReader = new FileReader();
+  fileReader.readAsDataURL(aux);
+  fileReader.onload = function(){
+    let base64 = fileReader.result;
+    base64 = base64.split(',');
+    setFile(base64[1]);
+   
+  } 
+};
+
   const handleDeleteClick = () => { 
       dispatch(uiCloseBranchModal());  
   };
@@ -108,17 +146,7 @@ export const BranchForm = () => {
   const opt = selectedTags.filter( e => (e.id !== removedItem.id));
   SetSelectedTags(opt);    
   }
-  const handleAvatar = (e) => {
-    const aux = e.target.files[0];
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(aux);
-    fileReader.onload = function(){
-      let base64 = fileReader.result;
-      base64 = base64.split(',');
-      setFile(base64[1]);
-     
-    } 
-  };
+ 
 
   return (
     <>
@@ -216,11 +244,12 @@ export const BranchForm = () => {
                   variant="outlined"
                   required
                   name="file"
-                  onChange={(e) => handleAvatar(e)}
+                  onChange={(e) => onSelectFile(e)}
                   id="file"
                   type="file"
                   inputProps={{ accept: ".png,.jpg,.jpeg" }}
                 />
+                {selectedFile &&  <img src={preview} /> }
                 <Grid item xs={12} sx={{marginTop:'10px'}}>
             <Typography color="textPrimary" variant="p" size="small">
               Tags
