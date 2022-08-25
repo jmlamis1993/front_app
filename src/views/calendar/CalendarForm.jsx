@@ -69,7 +69,7 @@ export const CalendarForm = ({ values }) => {
       }));
     }
     SetListProject(listproject);
-  }, [projects]);
+  }, []);
   useEffect(() => {
     let listTags = [];
     if (tags.length !== 0) {
@@ -85,7 +85,7 @@ export const CalendarForm = ({ values }) => {
       }));
     }   
     SetListTags(listTags);
-  }, [tags]);
+  }, []);
   useEffect(() => {
     let listuser = [];
     if (users.length !== 0) {
