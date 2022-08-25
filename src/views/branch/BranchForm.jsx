@@ -9,6 +9,7 @@ import {
   TextareaAutosize,
   Button,
   InputAdornment,
+  CardMedia
 } from "@mui/material";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import {
@@ -27,6 +28,7 @@ import SelectField from "../../components/FormFields/SelectField";
 import Multiselect from "multiselect-react-dropdown";
 import { tagsStartLoading } from "../../actions/tag";
 import { TagForm } from "../calendar/TagForm";
+
 
 const initialValues = {
   "id": '',
@@ -249,7 +251,18 @@ const handleAvatar = (e) => {
                   type="file"
                   inputProps={{ accept: ".png,.jpg,.jpeg" }}
                 />
-                {selectedFile &&  <img src={preview} /> }
+                {selectedFile &&  <>
+                <CardMedia
+                component="img"
+                sx={{
+                height: 233,
+                width: 350,
+                maxHeight: { xs: 233, md: 167 },
+                maxWidth: { xs: 350, md: 250 },
+                }}
+                src={preview}
+                />
+                </> }
                 <Grid item xs={12} sx={{marginTop:'10px'}}>
             <Typography color="textPrimary" variant="p" size="small">
               Tags
